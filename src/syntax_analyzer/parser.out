@@ -1,0 +1,1037 @@
+Created by PLY version 3.11 (http://www.dabeaz.com/ply)
+
+Unused terminals:
+
+    ERR
+
+Grammar
+
+Rule 0     S' -> expression
+Rule 1     expression -> expression PLUS term
+Rule 2     expression -> expression MINUS term
+Rule 3     expression -> expression EQUAL_TO term
+Rule 4     expression -> expression NOT_EQUAL term
+Rule 5     expression -> expression GREATER_THAN term
+Rule 6     expression -> expression GREATER_THAN_OR_EQUAL term
+Rule 7     expression -> expression LESS_THAN term
+Rule 8     expression -> expression LESS_THAN_OR_EQUAL term
+Rule 9     expression -> term
+Rule 10    term -> term TIMES factor
+Rule 11    term -> term DIVIDE factor
+Rule 12    term -> term INTEGER_DIVISION factor
+Rule 13    term -> term POW factor
+Rule 14    term -> factor
+Rule 15    factor -> INT
+Rule 16    factor -> REAL
+Rule 17    factor -> VAR
+Rule 18    factor -> LIST LBRACKET expression RBRACKET
+Rule 19    factor -> LPAREN expression RPAREN
+Rule 20    expression -> VAR ASSIGNMENT expression
+
+Terminals, with rules where they appear
+
+ASSIGNMENT           : 20
+DIVIDE               : 11
+EQUAL_TO             : 3
+ERR                  : 
+GREATER_THAN         : 5
+GREATER_THAN_OR_EQUAL : 6
+INT                  : 15
+INTEGER_DIVISION     : 12
+LBRACKET             : 18
+LESS_THAN            : 7
+LESS_THAN_OR_EQUAL   : 8
+LIST                 : 18
+LPAREN               : 19
+MINUS                : 2
+NOT_EQUAL            : 4
+PLUS                 : 1
+POW                  : 13
+RBRACKET             : 18
+REAL                 : 16
+RPAREN               : 19
+TIMES                : 10
+VAR                  : 17 20
+error                : 
+
+Nonterminals, with rules where they appear
+
+expression           : 1 2 3 4 5 6 7 8 18 19 20 0
+factor               : 10 11 12 13 14
+term                 : 1 2 3 4 5 6 7 8 9 10 11 12 13
+
+Parsing method: LALR
+
+state 0
+
+    (0) S' -> . expression
+    (1) expression -> . expression PLUS term
+    (2) expression -> . expression MINUS term
+    (3) expression -> . expression EQUAL_TO term
+    (4) expression -> . expression NOT_EQUAL term
+    (5) expression -> . expression GREATER_THAN term
+    (6) expression -> . expression GREATER_THAN_OR_EQUAL term
+    (7) expression -> . expression LESS_THAN term
+    (8) expression -> . expression LESS_THAN_OR_EQUAL term
+    (9) expression -> . term
+    (20) expression -> . VAR ASSIGNMENT expression
+    (10) term -> . term TIMES factor
+    (11) term -> . term DIVIDE factor
+    (12) term -> . term INTEGER_DIVISION factor
+    (13) term -> . term POW factor
+    (14) term -> . factor
+    (15) factor -> . INT
+    (16) factor -> . REAL
+    (17) factor -> . VAR
+    (18) factor -> . LIST LBRACKET expression RBRACKET
+    (19) factor -> . LPAREN expression RPAREN
+
+    VAR             shift and go to state 3
+    INT             shift and go to state 5
+    REAL            shift and go to state 6
+    LIST            shift and go to state 7
+    LPAREN          shift and go to state 8
+
+    expression                     shift and go to state 1
+    term                           shift and go to state 2
+    factor                         shift and go to state 4
+
+state 1
+
+    (0) S' -> expression .
+    (1) expression -> expression . PLUS term
+    (2) expression -> expression . MINUS term
+    (3) expression -> expression . EQUAL_TO term
+    (4) expression -> expression . NOT_EQUAL term
+    (5) expression -> expression . GREATER_THAN term
+    (6) expression -> expression . GREATER_THAN_OR_EQUAL term
+    (7) expression -> expression . LESS_THAN term
+    (8) expression -> expression . LESS_THAN_OR_EQUAL term
+
+    PLUS            shift and go to state 9
+    MINUS           shift and go to state 10
+    EQUAL_TO        shift and go to state 11
+    NOT_EQUAL       shift and go to state 12
+    GREATER_THAN    shift and go to state 13
+    GREATER_THAN_OR_EQUAL shift and go to state 14
+    LESS_THAN       shift and go to state 15
+    LESS_THAN_OR_EQUAL shift and go to state 16
+
+
+state 2
+
+    (9) expression -> term .
+    (10) term -> term . TIMES factor
+    (11) term -> term . DIVIDE factor
+    (12) term -> term . INTEGER_DIVISION factor
+    (13) term -> term . POW factor
+
+    PLUS            reduce using rule 9 (expression -> term .)
+    MINUS           reduce using rule 9 (expression -> term .)
+    EQUAL_TO        reduce using rule 9 (expression -> term .)
+    NOT_EQUAL       reduce using rule 9 (expression -> term .)
+    GREATER_THAN    reduce using rule 9 (expression -> term .)
+    GREATER_THAN_OR_EQUAL reduce using rule 9 (expression -> term .)
+    LESS_THAN       reduce using rule 9 (expression -> term .)
+    LESS_THAN_OR_EQUAL reduce using rule 9 (expression -> term .)
+    $end            reduce using rule 9 (expression -> term .)
+    RPAREN          reduce using rule 9 (expression -> term .)
+    RBRACKET        reduce using rule 9 (expression -> term .)
+    TIMES           shift and go to state 17
+    DIVIDE          shift and go to state 18
+    INTEGER_DIVISION shift and go to state 19
+    POW             shift and go to state 20
+
+
+state 3
+
+    (20) expression -> VAR . ASSIGNMENT expression
+    (17) factor -> VAR .
+
+    ASSIGNMENT      shift and go to state 21
+    TIMES           reduce using rule 17 (factor -> VAR .)
+    DIVIDE          reduce using rule 17 (factor -> VAR .)
+    INTEGER_DIVISION reduce using rule 17 (factor -> VAR .)
+    POW             reduce using rule 17 (factor -> VAR .)
+    PLUS            reduce using rule 17 (factor -> VAR .)
+    MINUS           reduce using rule 17 (factor -> VAR .)
+    EQUAL_TO        reduce using rule 17 (factor -> VAR .)
+    NOT_EQUAL       reduce using rule 17 (factor -> VAR .)
+    GREATER_THAN    reduce using rule 17 (factor -> VAR .)
+    GREATER_THAN_OR_EQUAL reduce using rule 17 (factor -> VAR .)
+    LESS_THAN       reduce using rule 17 (factor -> VAR .)
+    LESS_THAN_OR_EQUAL reduce using rule 17 (factor -> VAR .)
+    $end            reduce using rule 17 (factor -> VAR .)
+    RPAREN          reduce using rule 17 (factor -> VAR .)
+    RBRACKET        reduce using rule 17 (factor -> VAR .)
+
+
+state 4
+
+    (14) term -> factor .
+
+    TIMES           reduce using rule 14 (term -> factor .)
+    DIVIDE          reduce using rule 14 (term -> factor .)
+    INTEGER_DIVISION reduce using rule 14 (term -> factor .)
+    POW             reduce using rule 14 (term -> factor .)
+    PLUS            reduce using rule 14 (term -> factor .)
+    MINUS           reduce using rule 14 (term -> factor .)
+    EQUAL_TO        reduce using rule 14 (term -> factor .)
+    NOT_EQUAL       reduce using rule 14 (term -> factor .)
+    GREATER_THAN    reduce using rule 14 (term -> factor .)
+    GREATER_THAN_OR_EQUAL reduce using rule 14 (term -> factor .)
+    LESS_THAN       reduce using rule 14 (term -> factor .)
+    LESS_THAN_OR_EQUAL reduce using rule 14 (term -> factor .)
+    $end            reduce using rule 14 (term -> factor .)
+    RPAREN          reduce using rule 14 (term -> factor .)
+    RBRACKET        reduce using rule 14 (term -> factor .)
+
+
+state 5
+
+    (15) factor -> INT .
+
+    TIMES           reduce using rule 15 (factor -> INT .)
+    DIVIDE          reduce using rule 15 (factor -> INT .)
+    INTEGER_DIVISION reduce using rule 15 (factor -> INT .)
+    POW             reduce using rule 15 (factor -> INT .)
+    PLUS            reduce using rule 15 (factor -> INT .)
+    MINUS           reduce using rule 15 (factor -> INT .)
+    EQUAL_TO        reduce using rule 15 (factor -> INT .)
+    NOT_EQUAL       reduce using rule 15 (factor -> INT .)
+    GREATER_THAN    reduce using rule 15 (factor -> INT .)
+    GREATER_THAN_OR_EQUAL reduce using rule 15 (factor -> INT .)
+    LESS_THAN       reduce using rule 15 (factor -> INT .)
+    LESS_THAN_OR_EQUAL reduce using rule 15 (factor -> INT .)
+    $end            reduce using rule 15 (factor -> INT .)
+    RPAREN          reduce using rule 15 (factor -> INT .)
+    RBRACKET        reduce using rule 15 (factor -> INT .)
+
+
+state 6
+
+    (16) factor -> REAL .
+
+    TIMES           reduce using rule 16 (factor -> REAL .)
+    DIVIDE          reduce using rule 16 (factor -> REAL .)
+    INTEGER_DIVISION reduce using rule 16 (factor -> REAL .)
+    POW             reduce using rule 16 (factor -> REAL .)
+    PLUS            reduce using rule 16 (factor -> REAL .)
+    MINUS           reduce using rule 16 (factor -> REAL .)
+    EQUAL_TO        reduce using rule 16 (factor -> REAL .)
+    NOT_EQUAL       reduce using rule 16 (factor -> REAL .)
+    GREATER_THAN    reduce using rule 16 (factor -> REAL .)
+    GREATER_THAN_OR_EQUAL reduce using rule 16 (factor -> REAL .)
+    LESS_THAN       reduce using rule 16 (factor -> REAL .)
+    LESS_THAN_OR_EQUAL reduce using rule 16 (factor -> REAL .)
+    $end            reduce using rule 16 (factor -> REAL .)
+    RPAREN          reduce using rule 16 (factor -> REAL .)
+    RBRACKET        reduce using rule 16 (factor -> REAL .)
+
+
+state 7
+
+    (18) factor -> LIST . LBRACKET expression RBRACKET
+
+    LBRACKET        shift and go to state 22
+
+
+state 8
+
+    (19) factor -> LPAREN . expression RPAREN
+    (1) expression -> . expression PLUS term
+    (2) expression -> . expression MINUS term
+    (3) expression -> . expression EQUAL_TO term
+    (4) expression -> . expression NOT_EQUAL term
+    (5) expression -> . expression GREATER_THAN term
+    (6) expression -> . expression GREATER_THAN_OR_EQUAL term
+    (7) expression -> . expression LESS_THAN term
+    (8) expression -> . expression LESS_THAN_OR_EQUAL term
+    (9) expression -> . term
+    (20) expression -> . VAR ASSIGNMENT expression
+    (10) term -> . term TIMES factor
+    (11) term -> . term DIVIDE factor
+    (12) term -> . term INTEGER_DIVISION factor
+    (13) term -> . term POW factor
+    (14) term -> . factor
+    (15) factor -> . INT
+    (16) factor -> . REAL
+    (17) factor -> . VAR
+    (18) factor -> . LIST LBRACKET expression RBRACKET
+    (19) factor -> . LPAREN expression RPAREN
+
+    VAR             shift and go to state 3
+    INT             shift and go to state 5
+    REAL            shift and go to state 6
+    LIST            shift and go to state 7
+    LPAREN          shift and go to state 8
+
+    expression                     shift and go to state 23
+    term                           shift and go to state 2
+    factor                         shift and go to state 4
+
+state 9
+
+    (1) expression -> expression PLUS . term
+    (10) term -> . term TIMES factor
+    (11) term -> . term DIVIDE factor
+    (12) term -> . term INTEGER_DIVISION factor
+    (13) term -> . term POW factor
+    (14) term -> . factor
+    (15) factor -> . INT
+    (16) factor -> . REAL
+    (17) factor -> . VAR
+    (18) factor -> . LIST LBRACKET expression RBRACKET
+    (19) factor -> . LPAREN expression RPAREN
+
+    INT             shift and go to state 5
+    REAL            shift and go to state 6
+    VAR             shift and go to state 25
+    LIST            shift and go to state 7
+    LPAREN          shift and go to state 8
+
+    term                           shift and go to state 24
+    factor                         shift and go to state 4
+
+state 10
+
+    (2) expression -> expression MINUS . term
+    (10) term -> . term TIMES factor
+    (11) term -> . term DIVIDE factor
+    (12) term -> . term INTEGER_DIVISION factor
+    (13) term -> . term POW factor
+    (14) term -> . factor
+    (15) factor -> . INT
+    (16) factor -> . REAL
+    (17) factor -> . VAR
+    (18) factor -> . LIST LBRACKET expression RBRACKET
+    (19) factor -> . LPAREN expression RPAREN
+
+    INT             shift and go to state 5
+    REAL            shift and go to state 6
+    VAR             shift and go to state 25
+    LIST            shift and go to state 7
+    LPAREN          shift and go to state 8
+
+    term                           shift and go to state 26
+    factor                         shift and go to state 4
+
+state 11
+
+    (3) expression -> expression EQUAL_TO . term
+    (10) term -> . term TIMES factor
+    (11) term -> . term DIVIDE factor
+    (12) term -> . term INTEGER_DIVISION factor
+    (13) term -> . term POW factor
+    (14) term -> . factor
+    (15) factor -> . INT
+    (16) factor -> . REAL
+    (17) factor -> . VAR
+    (18) factor -> . LIST LBRACKET expression RBRACKET
+    (19) factor -> . LPAREN expression RPAREN
+
+    INT             shift and go to state 5
+    REAL            shift and go to state 6
+    VAR             shift and go to state 25
+    LIST            shift and go to state 7
+    LPAREN          shift and go to state 8
+
+    term                           shift and go to state 27
+    factor                         shift and go to state 4
+
+state 12
+
+    (4) expression -> expression NOT_EQUAL . term
+    (10) term -> . term TIMES factor
+    (11) term -> . term DIVIDE factor
+    (12) term -> . term INTEGER_DIVISION factor
+    (13) term -> . term POW factor
+    (14) term -> . factor
+    (15) factor -> . INT
+    (16) factor -> . REAL
+    (17) factor -> . VAR
+    (18) factor -> . LIST LBRACKET expression RBRACKET
+    (19) factor -> . LPAREN expression RPAREN
+
+    INT             shift and go to state 5
+    REAL            shift and go to state 6
+    VAR             shift and go to state 25
+    LIST            shift and go to state 7
+    LPAREN          shift and go to state 8
+
+    term                           shift and go to state 28
+    factor                         shift and go to state 4
+
+state 13
+
+    (5) expression -> expression GREATER_THAN . term
+    (10) term -> . term TIMES factor
+    (11) term -> . term DIVIDE factor
+    (12) term -> . term INTEGER_DIVISION factor
+    (13) term -> . term POW factor
+    (14) term -> . factor
+    (15) factor -> . INT
+    (16) factor -> . REAL
+    (17) factor -> . VAR
+    (18) factor -> . LIST LBRACKET expression RBRACKET
+    (19) factor -> . LPAREN expression RPAREN
+
+    INT             shift and go to state 5
+    REAL            shift and go to state 6
+    VAR             shift and go to state 25
+    LIST            shift and go to state 7
+    LPAREN          shift and go to state 8
+
+    term                           shift and go to state 29
+    factor                         shift and go to state 4
+
+state 14
+
+    (6) expression -> expression GREATER_THAN_OR_EQUAL . term
+    (10) term -> . term TIMES factor
+    (11) term -> . term DIVIDE factor
+    (12) term -> . term INTEGER_DIVISION factor
+    (13) term -> . term POW factor
+    (14) term -> . factor
+    (15) factor -> . INT
+    (16) factor -> . REAL
+    (17) factor -> . VAR
+    (18) factor -> . LIST LBRACKET expression RBRACKET
+    (19) factor -> . LPAREN expression RPAREN
+
+    INT             shift and go to state 5
+    REAL            shift and go to state 6
+    VAR             shift and go to state 25
+    LIST            shift and go to state 7
+    LPAREN          shift and go to state 8
+
+    term                           shift and go to state 30
+    factor                         shift and go to state 4
+
+state 15
+
+    (7) expression -> expression LESS_THAN . term
+    (10) term -> . term TIMES factor
+    (11) term -> . term DIVIDE factor
+    (12) term -> . term INTEGER_DIVISION factor
+    (13) term -> . term POW factor
+    (14) term -> . factor
+    (15) factor -> . INT
+    (16) factor -> . REAL
+    (17) factor -> . VAR
+    (18) factor -> . LIST LBRACKET expression RBRACKET
+    (19) factor -> . LPAREN expression RPAREN
+
+    INT             shift and go to state 5
+    REAL            shift and go to state 6
+    VAR             shift and go to state 25
+    LIST            shift and go to state 7
+    LPAREN          shift and go to state 8
+
+    term                           shift and go to state 31
+    factor                         shift and go to state 4
+
+state 16
+
+    (8) expression -> expression LESS_THAN_OR_EQUAL . term
+    (10) term -> . term TIMES factor
+    (11) term -> . term DIVIDE factor
+    (12) term -> . term INTEGER_DIVISION factor
+    (13) term -> . term POW factor
+    (14) term -> . factor
+    (15) factor -> . INT
+    (16) factor -> . REAL
+    (17) factor -> . VAR
+    (18) factor -> . LIST LBRACKET expression RBRACKET
+    (19) factor -> . LPAREN expression RPAREN
+
+    INT             shift and go to state 5
+    REAL            shift and go to state 6
+    VAR             shift and go to state 25
+    LIST            shift and go to state 7
+    LPAREN          shift and go to state 8
+
+    term                           shift and go to state 32
+    factor                         shift and go to state 4
+
+state 17
+
+    (10) term -> term TIMES . factor
+    (15) factor -> . INT
+    (16) factor -> . REAL
+    (17) factor -> . VAR
+    (18) factor -> . LIST LBRACKET expression RBRACKET
+    (19) factor -> . LPAREN expression RPAREN
+
+    INT             shift and go to state 5
+    REAL            shift and go to state 6
+    VAR             shift and go to state 25
+    LIST            shift and go to state 7
+    LPAREN          shift and go to state 8
+
+    factor                         shift and go to state 33
+
+state 18
+
+    (11) term -> term DIVIDE . factor
+    (15) factor -> . INT
+    (16) factor -> . REAL
+    (17) factor -> . VAR
+    (18) factor -> . LIST LBRACKET expression RBRACKET
+    (19) factor -> . LPAREN expression RPAREN
+
+    INT             shift and go to state 5
+    REAL            shift and go to state 6
+    VAR             shift and go to state 25
+    LIST            shift and go to state 7
+    LPAREN          shift and go to state 8
+
+    factor                         shift and go to state 34
+
+state 19
+
+    (12) term -> term INTEGER_DIVISION . factor
+    (15) factor -> . INT
+    (16) factor -> . REAL
+    (17) factor -> . VAR
+    (18) factor -> . LIST LBRACKET expression RBRACKET
+    (19) factor -> . LPAREN expression RPAREN
+
+    INT             shift and go to state 5
+    REAL            shift and go to state 6
+    VAR             shift and go to state 25
+    LIST            shift and go to state 7
+    LPAREN          shift and go to state 8
+
+    factor                         shift and go to state 35
+
+state 20
+
+    (13) term -> term POW . factor
+    (15) factor -> . INT
+    (16) factor -> . REAL
+    (17) factor -> . VAR
+    (18) factor -> . LIST LBRACKET expression RBRACKET
+    (19) factor -> . LPAREN expression RPAREN
+
+    INT             shift and go to state 5
+    REAL            shift and go to state 6
+    VAR             shift and go to state 25
+    LIST            shift and go to state 7
+    LPAREN          shift and go to state 8
+
+    factor                         shift and go to state 36
+
+state 21
+
+    (20) expression -> VAR ASSIGNMENT . expression
+    (1) expression -> . expression PLUS term
+    (2) expression -> . expression MINUS term
+    (3) expression -> . expression EQUAL_TO term
+    (4) expression -> . expression NOT_EQUAL term
+    (5) expression -> . expression GREATER_THAN term
+    (6) expression -> . expression GREATER_THAN_OR_EQUAL term
+    (7) expression -> . expression LESS_THAN term
+    (8) expression -> . expression LESS_THAN_OR_EQUAL term
+    (9) expression -> . term
+    (20) expression -> . VAR ASSIGNMENT expression
+    (10) term -> . term TIMES factor
+    (11) term -> . term DIVIDE factor
+    (12) term -> . term INTEGER_DIVISION factor
+    (13) term -> . term POW factor
+    (14) term -> . factor
+    (15) factor -> . INT
+    (16) factor -> . REAL
+    (17) factor -> . VAR
+    (18) factor -> . LIST LBRACKET expression RBRACKET
+    (19) factor -> . LPAREN expression RPAREN
+
+    VAR             shift and go to state 3
+    INT             shift and go to state 5
+    REAL            shift and go to state 6
+    LIST            shift and go to state 7
+    LPAREN          shift and go to state 8
+
+    expression                     shift and go to state 37
+    term                           shift and go to state 2
+    factor                         shift and go to state 4
+
+state 22
+
+    (18) factor -> LIST LBRACKET . expression RBRACKET
+    (1) expression -> . expression PLUS term
+    (2) expression -> . expression MINUS term
+    (3) expression -> . expression EQUAL_TO term
+    (4) expression -> . expression NOT_EQUAL term
+    (5) expression -> . expression GREATER_THAN term
+    (6) expression -> . expression GREATER_THAN_OR_EQUAL term
+    (7) expression -> . expression LESS_THAN term
+    (8) expression -> . expression LESS_THAN_OR_EQUAL term
+    (9) expression -> . term
+    (20) expression -> . VAR ASSIGNMENT expression
+    (10) term -> . term TIMES factor
+    (11) term -> . term DIVIDE factor
+    (12) term -> . term INTEGER_DIVISION factor
+    (13) term -> . term POW factor
+    (14) term -> . factor
+    (15) factor -> . INT
+    (16) factor -> . REAL
+    (17) factor -> . VAR
+    (18) factor -> . LIST LBRACKET expression RBRACKET
+    (19) factor -> . LPAREN expression RPAREN
+
+    VAR             shift and go to state 3
+    INT             shift and go to state 5
+    REAL            shift and go to state 6
+    LIST            shift and go to state 7
+    LPAREN          shift and go to state 8
+
+    expression                     shift and go to state 38
+    term                           shift and go to state 2
+    factor                         shift and go to state 4
+
+state 23
+
+    (19) factor -> LPAREN expression . RPAREN
+    (1) expression -> expression . PLUS term
+    (2) expression -> expression . MINUS term
+    (3) expression -> expression . EQUAL_TO term
+    (4) expression -> expression . NOT_EQUAL term
+    (5) expression -> expression . GREATER_THAN term
+    (6) expression -> expression . GREATER_THAN_OR_EQUAL term
+    (7) expression -> expression . LESS_THAN term
+    (8) expression -> expression . LESS_THAN_OR_EQUAL term
+
+    RPAREN          shift and go to state 39
+    PLUS            shift and go to state 9
+    MINUS           shift and go to state 10
+    EQUAL_TO        shift and go to state 11
+    NOT_EQUAL       shift and go to state 12
+    GREATER_THAN    shift and go to state 13
+    GREATER_THAN_OR_EQUAL shift and go to state 14
+    LESS_THAN       shift and go to state 15
+    LESS_THAN_OR_EQUAL shift and go to state 16
+
+
+state 24
+
+    (1) expression -> expression PLUS term .
+    (10) term -> term . TIMES factor
+    (11) term -> term . DIVIDE factor
+    (12) term -> term . INTEGER_DIVISION factor
+    (13) term -> term . POW factor
+
+    PLUS            reduce using rule 1 (expression -> expression PLUS term .)
+    MINUS           reduce using rule 1 (expression -> expression PLUS term .)
+    EQUAL_TO        reduce using rule 1 (expression -> expression PLUS term .)
+    NOT_EQUAL       reduce using rule 1 (expression -> expression PLUS term .)
+    GREATER_THAN    reduce using rule 1 (expression -> expression PLUS term .)
+    GREATER_THAN_OR_EQUAL reduce using rule 1 (expression -> expression PLUS term .)
+    LESS_THAN       reduce using rule 1 (expression -> expression PLUS term .)
+    LESS_THAN_OR_EQUAL reduce using rule 1 (expression -> expression PLUS term .)
+    $end            reduce using rule 1 (expression -> expression PLUS term .)
+    RPAREN          reduce using rule 1 (expression -> expression PLUS term .)
+    RBRACKET        reduce using rule 1 (expression -> expression PLUS term .)
+    TIMES           shift and go to state 17
+    DIVIDE          shift and go to state 18
+    INTEGER_DIVISION shift and go to state 19
+    POW             shift and go to state 20
+
+
+state 25
+
+    (17) factor -> VAR .
+
+    TIMES           reduce using rule 17 (factor -> VAR .)
+    DIVIDE          reduce using rule 17 (factor -> VAR .)
+    INTEGER_DIVISION reduce using rule 17 (factor -> VAR .)
+    POW             reduce using rule 17 (factor -> VAR .)
+    PLUS            reduce using rule 17 (factor -> VAR .)
+    MINUS           reduce using rule 17 (factor -> VAR .)
+    EQUAL_TO        reduce using rule 17 (factor -> VAR .)
+    NOT_EQUAL       reduce using rule 17 (factor -> VAR .)
+    GREATER_THAN    reduce using rule 17 (factor -> VAR .)
+    GREATER_THAN_OR_EQUAL reduce using rule 17 (factor -> VAR .)
+    LESS_THAN       reduce using rule 17 (factor -> VAR .)
+    LESS_THAN_OR_EQUAL reduce using rule 17 (factor -> VAR .)
+    $end            reduce using rule 17 (factor -> VAR .)
+    RPAREN          reduce using rule 17 (factor -> VAR .)
+    RBRACKET        reduce using rule 17 (factor -> VAR .)
+
+
+state 26
+
+    (2) expression -> expression MINUS term .
+    (10) term -> term . TIMES factor
+    (11) term -> term . DIVIDE factor
+    (12) term -> term . INTEGER_DIVISION factor
+    (13) term -> term . POW factor
+
+    PLUS            reduce using rule 2 (expression -> expression MINUS term .)
+    MINUS           reduce using rule 2 (expression -> expression MINUS term .)
+    EQUAL_TO        reduce using rule 2 (expression -> expression MINUS term .)
+    NOT_EQUAL       reduce using rule 2 (expression -> expression MINUS term .)
+    GREATER_THAN    reduce using rule 2 (expression -> expression MINUS term .)
+    GREATER_THAN_OR_EQUAL reduce using rule 2 (expression -> expression MINUS term .)
+    LESS_THAN       reduce using rule 2 (expression -> expression MINUS term .)
+    LESS_THAN_OR_EQUAL reduce using rule 2 (expression -> expression MINUS term .)
+    $end            reduce using rule 2 (expression -> expression MINUS term .)
+    RPAREN          reduce using rule 2 (expression -> expression MINUS term .)
+    RBRACKET        reduce using rule 2 (expression -> expression MINUS term .)
+    TIMES           shift and go to state 17
+    DIVIDE          shift and go to state 18
+    INTEGER_DIVISION shift and go to state 19
+    POW             shift and go to state 20
+
+
+state 27
+
+    (3) expression -> expression EQUAL_TO term .
+    (10) term -> term . TIMES factor
+    (11) term -> term . DIVIDE factor
+    (12) term -> term . INTEGER_DIVISION factor
+    (13) term -> term . POW factor
+
+    PLUS            reduce using rule 3 (expression -> expression EQUAL_TO term .)
+    MINUS           reduce using rule 3 (expression -> expression EQUAL_TO term .)
+    EQUAL_TO        reduce using rule 3 (expression -> expression EQUAL_TO term .)
+    NOT_EQUAL       reduce using rule 3 (expression -> expression EQUAL_TO term .)
+    GREATER_THAN    reduce using rule 3 (expression -> expression EQUAL_TO term .)
+    GREATER_THAN_OR_EQUAL reduce using rule 3 (expression -> expression EQUAL_TO term .)
+    LESS_THAN       reduce using rule 3 (expression -> expression EQUAL_TO term .)
+    LESS_THAN_OR_EQUAL reduce using rule 3 (expression -> expression EQUAL_TO term .)
+    $end            reduce using rule 3 (expression -> expression EQUAL_TO term .)
+    RPAREN          reduce using rule 3 (expression -> expression EQUAL_TO term .)
+    RBRACKET        reduce using rule 3 (expression -> expression EQUAL_TO term .)
+    TIMES           shift and go to state 17
+    DIVIDE          shift and go to state 18
+    INTEGER_DIVISION shift and go to state 19
+    POW             shift and go to state 20
+
+
+state 28
+
+    (4) expression -> expression NOT_EQUAL term .
+    (10) term -> term . TIMES factor
+    (11) term -> term . DIVIDE factor
+    (12) term -> term . INTEGER_DIVISION factor
+    (13) term -> term . POW factor
+
+    PLUS            reduce using rule 4 (expression -> expression NOT_EQUAL term .)
+    MINUS           reduce using rule 4 (expression -> expression NOT_EQUAL term .)
+    EQUAL_TO        reduce using rule 4 (expression -> expression NOT_EQUAL term .)
+    NOT_EQUAL       reduce using rule 4 (expression -> expression NOT_EQUAL term .)
+    GREATER_THAN    reduce using rule 4 (expression -> expression NOT_EQUAL term .)
+    GREATER_THAN_OR_EQUAL reduce using rule 4 (expression -> expression NOT_EQUAL term .)
+    LESS_THAN       reduce using rule 4 (expression -> expression NOT_EQUAL term .)
+    LESS_THAN_OR_EQUAL reduce using rule 4 (expression -> expression NOT_EQUAL term .)
+    $end            reduce using rule 4 (expression -> expression NOT_EQUAL term .)
+    RPAREN          reduce using rule 4 (expression -> expression NOT_EQUAL term .)
+    RBRACKET        reduce using rule 4 (expression -> expression NOT_EQUAL term .)
+    TIMES           shift and go to state 17
+    DIVIDE          shift and go to state 18
+    INTEGER_DIVISION shift and go to state 19
+    POW             shift and go to state 20
+
+
+state 29
+
+    (5) expression -> expression GREATER_THAN term .
+    (10) term -> term . TIMES factor
+    (11) term -> term . DIVIDE factor
+    (12) term -> term . INTEGER_DIVISION factor
+    (13) term -> term . POW factor
+
+    PLUS            reduce using rule 5 (expression -> expression GREATER_THAN term .)
+    MINUS           reduce using rule 5 (expression -> expression GREATER_THAN term .)
+    EQUAL_TO        reduce using rule 5 (expression -> expression GREATER_THAN term .)
+    NOT_EQUAL       reduce using rule 5 (expression -> expression GREATER_THAN term .)
+    GREATER_THAN    reduce using rule 5 (expression -> expression GREATER_THAN term .)
+    GREATER_THAN_OR_EQUAL reduce using rule 5 (expression -> expression GREATER_THAN term .)
+    LESS_THAN       reduce using rule 5 (expression -> expression GREATER_THAN term .)
+    LESS_THAN_OR_EQUAL reduce using rule 5 (expression -> expression GREATER_THAN term .)
+    $end            reduce using rule 5 (expression -> expression GREATER_THAN term .)
+    RPAREN          reduce using rule 5 (expression -> expression GREATER_THAN term .)
+    RBRACKET        reduce using rule 5 (expression -> expression GREATER_THAN term .)
+    TIMES           shift and go to state 17
+    DIVIDE          shift and go to state 18
+    INTEGER_DIVISION shift and go to state 19
+    POW             shift and go to state 20
+
+
+state 30
+
+    (6) expression -> expression GREATER_THAN_OR_EQUAL term .
+    (10) term -> term . TIMES factor
+    (11) term -> term . DIVIDE factor
+    (12) term -> term . INTEGER_DIVISION factor
+    (13) term -> term . POW factor
+
+    PLUS            reduce using rule 6 (expression -> expression GREATER_THAN_OR_EQUAL term .)
+    MINUS           reduce using rule 6 (expression -> expression GREATER_THAN_OR_EQUAL term .)
+    EQUAL_TO        reduce using rule 6 (expression -> expression GREATER_THAN_OR_EQUAL term .)
+    NOT_EQUAL       reduce using rule 6 (expression -> expression GREATER_THAN_OR_EQUAL term .)
+    GREATER_THAN    reduce using rule 6 (expression -> expression GREATER_THAN_OR_EQUAL term .)
+    GREATER_THAN_OR_EQUAL reduce using rule 6 (expression -> expression GREATER_THAN_OR_EQUAL term .)
+    LESS_THAN       reduce using rule 6 (expression -> expression GREATER_THAN_OR_EQUAL term .)
+    LESS_THAN_OR_EQUAL reduce using rule 6 (expression -> expression GREATER_THAN_OR_EQUAL term .)
+    $end            reduce using rule 6 (expression -> expression GREATER_THAN_OR_EQUAL term .)
+    RPAREN          reduce using rule 6 (expression -> expression GREATER_THAN_OR_EQUAL term .)
+    RBRACKET        reduce using rule 6 (expression -> expression GREATER_THAN_OR_EQUAL term .)
+    TIMES           shift and go to state 17
+    DIVIDE          shift and go to state 18
+    INTEGER_DIVISION shift and go to state 19
+    POW             shift and go to state 20
+
+
+state 31
+
+    (7) expression -> expression LESS_THAN term .
+    (10) term -> term . TIMES factor
+    (11) term -> term . DIVIDE factor
+    (12) term -> term . INTEGER_DIVISION factor
+    (13) term -> term . POW factor
+
+    PLUS            reduce using rule 7 (expression -> expression LESS_THAN term .)
+    MINUS           reduce using rule 7 (expression -> expression LESS_THAN term .)
+    EQUAL_TO        reduce using rule 7 (expression -> expression LESS_THAN term .)
+    NOT_EQUAL       reduce using rule 7 (expression -> expression LESS_THAN term .)
+    GREATER_THAN    reduce using rule 7 (expression -> expression LESS_THAN term .)
+    GREATER_THAN_OR_EQUAL reduce using rule 7 (expression -> expression LESS_THAN term .)
+    LESS_THAN       reduce using rule 7 (expression -> expression LESS_THAN term .)
+    LESS_THAN_OR_EQUAL reduce using rule 7 (expression -> expression LESS_THAN term .)
+    $end            reduce using rule 7 (expression -> expression LESS_THAN term .)
+    RPAREN          reduce using rule 7 (expression -> expression LESS_THAN term .)
+    RBRACKET        reduce using rule 7 (expression -> expression LESS_THAN term .)
+    TIMES           shift and go to state 17
+    DIVIDE          shift and go to state 18
+    INTEGER_DIVISION shift and go to state 19
+    POW             shift and go to state 20
+
+
+state 32
+
+    (8) expression -> expression LESS_THAN_OR_EQUAL term .
+    (10) term -> term . TIMES factor
+    (11) term -> term . DIVIDE factor
+    (12) term -> term . INTEGER_DIVISION factor
+    (13) term -> term . POW factor
+
+    PLUS            reduce using rule 8 (expression -> expression LESS_THAN_OR_EQUAL term .)
+    MINUS           reduce using rule 8 (expression -> expression LESS_THAN_OR_EQUAL term .)
+    EQUAL_TO        reduce using rule 8 (expression -> expression LESS_THAN_OR_EQUAL term .)
+    NOT_EQUAL       reduce using rule 8 (expression -> expression LESS_THAN_OR_EQUAL term .)
+    GREATER_THAN    reduce using rule 8 (expression -> expression LESS_THAN_OR_EQUAL term .)
+    GREATER_THAN_OR_EQUAL reduce using rule 8 (expression -> expression LESS_THAN_OR_EQUAL term .)
+    LESS_THAN       reduce using rule 8 (expression -> expression LESS_THAN_OR_EQUAL term .)
+    LESS_THAN_OR_EQUAL reduce using rule 8 (expression -> expression LESS_THAN_OR_EQUAL term .)
+    $end            reduce using rule 8 (expression -> expression LESS_THAN_OR_EQUAL term .)
+    RPAREN          reduce using rule 8 (expression -> expression LESS_THAN_OR_EQUAL term .)
+    RBRACKET        reduce using rule 8 (expression -> expression LESS_THAN_OR_EQUAL term .)
+    TIMES           shift and go to state 17
+    DIVIDE          shift and go to state 18
+    INTEGER_DIVISION shift and go to state 19
+    POW             shift and go to state 20
+
+
+state 33
+
+    (10) term -> term TIMES factor .
+
+    TIMES           reduce using rule 10 (term -> term TIMES factor .)
+    DIVIDE          reduce using rule 10 (term -> term TIMES factor .)
+    INTEGER_DIVISION reduce using rule 10 (term -> term TIMES factor .)
+    POW             reduce using rule 10 (term -> term TIMES factor .)
+    PLUS            reduce using rule 10 (term -> term TIMES factor .)
+    MINUS           reduce using rule 10 (term -> term TIMES factor .)
+    EQUAL_TO        reduce using rule 10 (term -> term TIMES factor .)
+    NOT_EQUAL       reduce using rule 10 (term -> term TIMES factor .)
+    GREATER_THAN    reduce using rule 10 (term -> term TIMES factor .)
+    GREATER_THAN_OR_EQUAL reduce using rule 10 (term -> term TIMES factor .)
+    LESS_THAN       reduce using rule 10 (term -> term TIMES factor .)
+    LESS_THAN_OR_EQUAL reduce using rule 10 (term -> term TIMES factor .)
+    $end            reduce using rule 10 (term -> term TIMES factor .)
+    RPAREN          reduce using rule 10 (term -> term TIMES factor .)
+    RBRACKET        reduce using rule 10 (term -> term TIMES factor .)
+
+
+state 34
+
+    (11) term -> term DIVIDE factor .
+
+    TIMES           reduce using rule 11 (term -> term DIVIDE factor .)
+    DIVIDE          reduce using rule 11 (term -> term DIVIDE factor .)
+    INTEGER_DIVISION reduce using rule 11 (term -> term DIVIDE factor .)
+    POW             reduce using rule 11 (term -> term DIVIDE factor .)
+    PLUS            reduce using rule 11 (term -> term DIVIDE factor .)
+    MINUS           reduce using rule 11 (term -> term DIVIDE factor .)
+    EQUAL_TO        reduce using rule 11 (term -> term DIVIDE factor .)
+    NOT_EQUAL       reduce using rule 11 (term -> term DIVIDE factor .)
+    GREATER_THAN    reduce using rule 11 (term -> term DIVIDE factor .)
+    GREATER_THAN_OR_EQUAL reduce using rule 11 (term -> term DIVIDE factor .)
+    LESS_THAN       reduce using rule 11 (term -> term DIVIDE factor .)
+    LESS_THAN_OR_EQUAL reduce using rule 11 (term -> term DIVIDE factor .)
+    $end            reduce using rule 11 (term -> term DIVIDE factor .)
+    RPAREN          reduce using rule 11 (term -> term DIVIDE factor .)
+    RBRACKET        reduce using rule 11 (term -> term DIVIDE factor .)
+
+
+state 35
+
+    (12) term -> term INTEGER_DIVISION factor .
+
+    TIMES           reduce using rule 12 (term -> term INTEGER_DIVISION factor .)
+    DIVIDE          reduce using rule 12 (term -> term INTEGER_DIVISION factor .)
+    INTEGER_DIVISION reduce using rule 12 (term -> term INTEGER_DIVISION factor .)
+    POW             reduce using rule 12 (term -> term INTEGER_DIVISION factor .)
+    PLUS            reduce using rule 12 (term -> term INTEGER_DIVISION factor .)
+    MINUS           reduce using rule 12 (term -> term INTEGER_DIVISION factor .)
+    EQUAL_TO        reduce using rule 12 (term -> term INTEGER_DIVISION factor .)
+    NOT_EQUAL       reduce using rule 12 (term -> term INTEGER_DIVISION factor .)
+    GREATER_THAN    reduce using rule 12 (term -> term INTEGER_DIVISION factor .)
+    GREATER_THAN_OR_EQUAL reduce using rule 12 (term -> term INTEGER_DIVISION factor .)
+    LESS_THAN       reduce using rule 12 (term -> term INTEGER_DIVISION factor .)
+    LESS_THAN_OR_EQUAL reduce using rule 12 (term -> term INTEGER_DIVISION factor .)
+    $end            reduce using rule 12 (term -> term INTEGER_DIVISION factor .)
+    RPAREN          reduce using rule 12 (term -> term INTEGER_DIVISION factor .)
+    RBRACKET        reduce using rule 12 (term -> term INTEGER_DIVISION factor .)
+
+
+state 36
+
+    (13) term -> term POW factor .
+
+    TIMES           reduce using rule 13 (term -> term POW factor .)
+    DIVIDE          reduce using rule 13 (term -> term POW factor .)
+    INTEGER_DIVISION reduce using rule 13 (term -> term POW factor .)
+    POW             reduce using rule 13 (term -> term POW factor .)
+    PLUS            reduce using rule 13 (term -> term POW factor .)
+    MINUS           reduce using rule 13 (term -> term POW factor .)
+    EQUAL_TO        reduce using rule 13 (term -> term POW factor .)
+    NOT_EQUAL       reduce using rule 13 (term -> term POW factor .)
+    GREATER_THAN    reduce using rule 13 (term -> term POW factor .)
+    GREATER_THAN_OR_EQUAL reduce using rule 13 (term -> term POW factor .)
+    LESS_THAN       reduce using rule 13 (term -> term POW factor .)
+    LESS_THAN_OR_EQUAL reduce using rule 13 (term -> term POW factor .)
+    $end            reduce using rule 13 (term -> term POW factor .)
+    RPAREN          reduce using rule 13 (term -> term POW factor .)
+    RBRACKET        reduce using rule 13 (term -> term POW factor .)
+
+
+state 37
+
+    (20) expression -> VAR ASSIGNMENT expression .
+    (1) expression -> expression . PLUS term
+    (2) expression -> expression . MINUS term
+    (3) expression -> expression . EQUAL_TO term
+    (4) expression -> expression . NOT_EQUAL term
+    (5) expression -> expression . GREATER_THAN term
+    (6) expression -> expression . GREATER_THAN_OR_EQUAL term
+    (7) expression -> expression . LESS_THAN term
+    (8) expression -> expression . LESS_THAN_OR_EQUAL term
+
+  ! shift/reduce conflict for PLUS resolved as shift
+  ! shift/reduce conflict for MINUS resolved as shift
+  ! shift/reduce conflict for EQUAL_TO resolved as shift
+  ! shift/reduce conflict for NOT_EQUAL resolved as shift
+  ! shift/reduce conflict for GREATER_THAN resolved as shift
+  ! shift/reduce conflict for GREATER_THAN_OR_EQUAL resolved as shift
+  ! shift/reduce conflict for LESS_THAN resolved as shift
+  ! shift/reduce conflict for LESS_THAN_OR_EQUAL resolved as shift
+    $end            reduce using rule 20 (expression -> VAR ASSIGNMENT expression .)
+    RPAREN          reduce using rule 20 (expression -> VAR ASSIGNMENT expression .)
+    RBRACKET        reduce using rule 20 (expression -> VAR ASSIGNMENT expression .)
+    PLUS            shift and go to state 9
+    MINUS           shift and go to state 10
+    EQUAL_TO        shift and go to state 11
+    NOT_EQUAL       shift and go to state 12
+    GREATER_THAN    shift and go to state 13
+    GREATER_THAN_OR_EQUAL shift and go to state 14
+    LESS_THAN       shift and go to state 15
+    LESS_THAN_OR_EQUAL shift and go to state 16
+
+  ! PLUS            [ reduce using rule 20 (expression -> VAR ASSIGNMENT expression .) ]
+  ! MINUS           [ reduce using rule 20 (expression -> VAR ASSIGNMENT expression .) ]
+  ! EQUAL_TO        [ reduce using rule 20 (expression -> VAR ASSIGNMENT expression .) ]
+  ! NOT_EQUAL       [ reduce using rule 20 (expression -> VAR ASSIGNMENT expression .) ]
+  ! GREATER_THAN    [ reduce using rule 20 (expression -> VAR ASSIGNMENT expression .) ]
+  ! GREATER_THAN_OR_EQUAL [ reduce using rule 20 (expression -> VAR ASSIGNMENT expression .) ]
+  ! LESS_THAN       [ reduce using rule 20 (expression -> VAR ASSIGNMENT expression .) ]
+  ! LESS_THAN_OR_EQUAL [ reduce using rule 20 (expression -> VAR ASSIGNMENT expression .) ]
+
+
+state 38
+
+    (18) factor -> LIST LBRACKET expression . RBRACKET
+    (1) expression -> expression . PLUS term
+    (2) expression -> expression . MINUS term
+    (3) expression -> expression . EQUAL_TO term
+    (4) expression -> expression . NOT_EQUAL term
+    (5) expression -> expression . GREATER_THAN term
+    (6) expression -> expression . GREATER_THAN_OR_EQUAL term
+    (7) expression -> expression . LESS_THAN term
+    (8) expression -> expression . LESS_THAN_OR_EQUAL term
+
+    RBRACKET        shift and go to state 40
+    PLUS            shift and go to state 9
+    MINUS           shift and go to state 10
+    EQUAL_TO        shift and go to state 11
+    NOT_EQUAL       shift and go to state 12
+    GREATER_THAN    shift and go to state 13
+    GREATER_THAN_OR_EQUAL shift and go to state 14
+    LESS_THAN       shift and go to state 15
+    LESS_THAN_OR_EQUAL shift and go to state 16
+
+
+state 39
+
+    (19) factor -> LPAREN expression RPAREN .
+
+    TIMES           reduce using rule 19 (factor -> LPAREN expression RPAREN .)
+    DIVIDE          reduce using rule 19 (factor -> LPAREN expression RPAREN .)
+    INTEGER_DIVISION reduce using rule 19 (factor -> LPAREN expression RPAREN .)
+    POW             reduce using rule 19 (factor -> LPAREN expression RPAREN .)
+    PLUS            reduce using rule 19 (factor -> LPAREN expression RPAREN .)
+    MINUS           reduce using rule 19 (factor -> LPAREN expression RPAREN .)
+    EQUAL_TO        reduce using rule 19 (factor -> LPAREN expression RPAREN .)
+    NOT_EQUAL       reduce using rule 19 (factor -> LPAREN expression RPAREN .)
+    GREATER_THAN    reduce using rule 19 (factor -> LPAREN expression RPAREN .)
+    GREATER_THAN_OR_EQUAL reduce using rule 19 (factor -> LPAREN expression RPAREN .)
+    LESS_THAN       reduce using rule 19 (factor -> LPAREN expression RPAREN .)
+    LESS_THAN_OR_EQUAL reduce using rule 19 (factor -> LPAREN expression RPAREN .)
+    $end            reduce using rule 19 (factor -> LPAREN expression RPAREN .)
+    RPAREN          reduce using rule 19 (factor -> LPAREN expression RPAREN .)
+    RBRACKET        reduce using rule 19 (factor -> LPAREN expression RPAREN .)
+
+
+state 40
+
+    (18) factor -> LIST LBRACKET expression RBRACKET .
+
+    TIMES           reduce using rule 18 (factor -> LIST LBRACKET expression RBRACKET .)
+    DIVIDE          reduce using rule 18 (factor -> LIST LBRACKET expression RBRACKET .)
+    INTEGER_DIVISION reduce using rule 18 (factor -> LIST LBRACKET expression RBRACKET .)
+    POW             reduce using rule 18 (factor -> LIST LBRACKET expression RBRACKET .)
+    PLUS            reduce using rule 18 (factor -> LIST LBRACKET expression RBRACKET .)
+    MINUS           reduce using rule 18 (factor -> LIST LBRACKET expression RBRACKET .)
+    EQUAL_TO        reduce using rule 18 (factor -> LIST LBRACKET expression RBRACKET .)
+    NOT_EQUAL       reduce using rule 18 (factor -> LIST LBRACKET expression RBRACKET .)
+    GREATER_THAN    reduce using rule 18 (factor -> LIST LBRACKET expression RBRACKET .)
+    GREATER_THAN_OR_EQUAL reduce using rule 18 (factor -> LIST LBRACKET expression RBRACKET .)
+    LESS_THAN       reduce using rule 18 (factor -> LIST LBRACKET expression RBRACKET .)
+    LESS_THAN_OR_EQUAL reduce using rule 18 (factor -> LIST LBRACKET expression RBRACKET .)
+    $end            reduce using rule 18 (factor -> LIST LBRACKET expression RBRACKET .)
+    RPAREN          reduce using rule 18 (factor -> LIST LBRACKET expression RBRACKET .)
+    RBRACKET        reduce using rule 18 (factor -> LIST LBRACKET expression RBRACKET .)
+
+WARNING: 
+WARNING: Conflicts:
+WARNING: 
+WARNING: shift/reduce conflict for PLUS in state 37 resolved as shift
+WARNING: shift/reduce conflict for MINUS in state 37 resolved as shift
+WARNING: shift/reduce conflict for EQUAL_TO in state 37 resolved as shift
+WARNING: shift/reduce conflict for NOT_EQUAL in state 37 resolved as shift
+WARNING: shift/reduce conflict for GREATER_THAN in state 37 resolved as shift
+WARNING: shift/reduce conflict for GREATER_THAN_OR_EQUAL in state 37 resolved as shift
+WARNING: shift/reduce conflict for LESS_THAN in state 37 resolved as shift
+WARNING: shift/reduce conflict for LESS_THAN_OR_EQUAL in state 37 resolved as shift

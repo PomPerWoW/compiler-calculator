@@ -1,0 +1,27 @@
+# Expression Grammar for Calculator Language
+
+# Expressions
+expression : expression PLUS term
+          | expression MINUS term
+          | expression EQUAL_TO term
+          | expression NOT_EQUAL term
+          | expression GREATER_THAN term
+          | expression GREATER_THAN_OR_EQUAL term
+          | expression LESS_THAN term
+          | expression LESS_THAN_OR_EQUAL term
+          | term
+          | VAR ASSIGNMENT expression
+
+# Terms
+term : term TIMES factor
+     | term DIVIDE factor
+     | term INTEGER_DIVISION factor
+     | term POW factor
+     | factor
+
+# Factors
+factor : INT
+       | REAL
+       | VAR
+       | LIST LBRACKET expression RBRACKET
+       | LPAREN expression RPAREN 

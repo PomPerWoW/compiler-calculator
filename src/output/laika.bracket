@@ -1,0 +1,11 @@
+(23+8)
+(2.5*0)
+SyntaxError at line 1, pos 1
+3.0
+(x=5)
+(10*x)
+Error at line 6: 'LRParser' object has no attribute 'lexer'
+(x!=5)
+(2+5)
+(x=(list[2]))
+SyntaxError at line 1, pos 1

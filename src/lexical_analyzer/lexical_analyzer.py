@@ -95,9 +95,9 @@ class LexicalAnalyzer:
             if not tok:
                 break
 
-            print(
-                f"Token Type: {tok.type}, Token Value: {tok.value}, Token Line: {tok.lineno}, Token Position: {tok.lexpos}"
-            )
+            # print(
+            #     f"Token Type: {tok.type}, Token Value: {tok.value}, Token Line: {tok.lineno}, Token Position: {tok.lexpos}"
+            # )
 
             if tok.type in ("VAR", "LIST"):
                 self.symbol_table.insert(
