@@ -1,5 +1,4 @@
 import ply.lex as lex
-from src.symbol_table.symbol_table import SymbolTable
 
 
 class LexicalAnalyzer:
@@ -35,12 +34,12 @@ class LexicalAnalyzer:
     t_INTEGER_DIVISION = r"//"
     t_POW = r"\^"
     t_ASSIGNMENT = r"\="
+    t_EQUAL_TO = r"\=="
+    t_NOT_EQUAL = r"\!="
     t_GREATER_THAN = r"\>"
     t_GREATER_THAN_OR_EQUAL = r"\>="
     t_LESS_THAN = r"\<"
     t_LESS_THAN_OR_EQUAL = r"\<="
-    t_EQUAL_TO = r"\=="
-    t_NOT_EQUAL = r"\!="
     t_LPAREN = r"\("
     t_RPAREN = r"\)"
     t_LBRACKET = r"\["
@@ -87,11 +86,29 @@ class LexicalAnalyzer:
         print(f"Illegal character '{t.value[0]}'")
         t.lexer.skip(1)
 
+    def _handle_list_declaration(self, tok, current_var, list_size):
+        self.symbol_table.insert(
+            lexeme=current_var,
+            line_number=tok.lineno,
+            position=tok.lexpos,
+            token_type="LIST",
+            value=[0] * list_size,
+        )
+
+    def _handle_variable_assignment(self, tok, current_var, value):
+        self.symbol_table.insert(
+            lexeme=current_var,
+            line_number=tok.lineno,
+            position=tok.lexpos,
+            token_type="VAR",
+            value=value,
+        )
+
     def tokenize(self, expression, line_number):
         self.lexer.input(expression)
+        self.lexer.lineno = line_number
         tokens = []
 
-        # Variables to track declarations
         current_var = None
         is_list_declaration = False
         list_size = None
@@ -127,22 +144,7 @@ class LexicalAnalyzer:
                         value = tok.value
                 case "RBRACKET":
                     if is_list_declaration and current_var and list_size is not None:
-                        # Create list value dictionary
-                        list_value = {
-                            "type": "list",
-                            "initialized": True,
-                            "size": list_size,
-                            "elements": [0] * list_size,
-                        }
-                        # Insert the list variable into symbol table
-                        self.symbol_table.insert(
-                            lexeme=current_var,
-                            line_number=line_number,
-                            position=tok.lexpos,
-                            token_type="LIST",
-                            value=[0] * list_size,
-                        )
-                        # Reset tracking variables
+                        self._handle_list_declaration(tok, current_var, list_size)
                         current_var = None
                         is_list_declaration = False
                         list_size = None
@@ -150,16 +152,8 @@ class LexicalAnalyzer:
                         has_value = False
                         value = None
 
-            # Insert normal variable if we have a complete assignment
             if not is_list_declaration and current_var and is_assignment and has_value:
-                self.symbol_table.insert(
-                    lexeme=current_var,
-                    line_number=line_number,
-                    position=tok.lexpos,
-                    token_type="VAR",
-                    value=value,
-                )
-                # Reset tracking variables
+                self._handle_variable_assignment(tok, current_var, value)
                 current_var = None
                 is_assignment = False
                 has_value = False

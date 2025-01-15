@@ -1,5 +1,4 @@
 import ply.yacc as yacc
-from src.lexical_analyzer.lexical_analyzer import LexicalAnalyzer
 
 
 class SyntaxAnalyzer:
@@ -49,74 +48,36 @@ class SyntaxAnalyzer:
 
     def p_factor_var(self, p):
         """factor : VAR"""
-        symbol = self.symbol_table.lookup(p[1])
-        if not symbol:
-            raise ValueError(f"Undefined variable '{p[1]}' at line {p.lineno(1)}")
-        p[0] = symbol.value if symbol.value is not None else p[1]
+        self._validate_variable(p[1], p.lineno(1), p.lexpos(1))
+        p[0] = p[1]
 
     def p_factor_list_declaration(self, p):
         """factor : LIST LBRACKET expression RBRACKET"""
-        # Validate list size
         if not isinstance(p[3], int) or p[3] <= 0:
             raise ValueError(f"List size must be a positive integer, got {p[3]}")
-
-        # Create list with initial values
-        list_value = {
-            "type": "list",
-            "size": p[3],
-            "elements": [0] * p[3],  # Initialize all elements to 0
-        }
-        p[0] = ("list_decl", p[3], list_value)
+        p[0] = ("list_decl", p[3])
 
     def p_factor_list_access(self, p):
         """factor : VAR LBRACKET expression RBRACKET"""
-        # Check if variable exists
-        symbol = self.symbol_table.lookup(p[1])
-        if not symbol:
-            raise ValueError(f"Undefined variable '{p[1]}' at line {p.lineno(1)}")
-
-        # Check if it's a list
-        if not isinstance(symbol.value, dict) or symbol.value.get("type") != "list":
-            raise ValueError(f"Variable '{p[1]}' is not a list at line {p.lineno(1)}")
-
-        # Validate index
-        if not isinstance(p[3], int):
-            raise ValueError(f"List index must be an integer, got {p[3]}")
-
-        if p[3] < 0 or p[3] >= symbol.value["size"]:
-            raise IndexError(
-                f"Index {p[3]} out of range for list '{p[1]}' of size {symbol.value['size']}"
-            )
-
-        # Return the list element value
-        p[0] = symbol.value["elements"][p[3]]
+        symbol = self._validate_list_variable(p[1], p.lineno(1), p.lexpos(1))
+        self._validate_list_index(
+            p[1], p[3], len(symbol.value), p.lineno(1), p.lexpos(1)
+        )
+        p[0] = (p[1], "[", p[3], "]")
 
     def p_assignment_list_element(self, p):
         """expression : VAR LBRACKET expression RBRACKET ASSIGNMENT expression"""
-        # Check if variable exists
-        symbol = self.symbol_table.lookup(p[1])
-        if not symbol:
-            raise ValueError(f"Undefined variable '{p[1]}' at line {p.lineno(1)}")
+        symbol = self._validate_list_variable(p[1], p.lineno(1), p.lexpos(1))
+        self._validate_list_index(
+            p[1], p[3], len(symbol.value), p.lineno(1), p.lexpos(1)
+        )
 
-        # Check if it's a list
-        if not isinstance(symbol.value, dict) or symbol.value.get("type") != "list":
-            raise ValueError(f"Variable '{p[1]}' is not a list at line {p.lineno(1)}")
-
-        # Validate index
-        if not isinstance(p[3], int):
-            raise ValueError(f"List index must be an integer, got {p[3]}")
-
-        if p[3] < 0 or p[3] >= symbol.value["size"]:
-            raise IndexError(
-                f"Index {p[3]} out of range for list '{p[1]}' of size {symbol.value['size']}"
+        if not isinstance(p[6], int):
+            raise ValueError(
+                f"List elements must be integers, got {p[6]} at line {p.lineno(1)}, pos {p.lexpos(1) + 1}"
             )
 
-        # Validate assigned value is integer
-        if not isinstance(p[6], int):
-            raise ValueError(f"List elements must be integers, got {p[6]}")
-
-        # Update list element
-        symbol.value["elements"][p[3]] = p[6]
+        symbol.value[p[3]] = p[6]
         p[0] = ("list_assign", p[1], p[3], p[6])
 
     def p_factor_expr(self, p):
@@ -125,22 +86,18 @@ class SyntaxAnalyzer:
 
     def p_assignment(self, p):
         """expression : VAR ASSIGNMENT expression"""
-        # For list declaration, handle differently
-        if (
-            isinstance(p[3], tuple)
-            and p[3][0] == "list_decl"
-            and isinstance(p[3][2], dict)
-        ):
+        if isinstance(p[3], tuple) and p[3][0] == "list_decl":
+            list_size = p[3][1]
             self.symbol_table.insert(
                 lexeme=p[1],
                 line_number=p.lineno(1),
                 position=p.lexpos(1),
-                token_type="VAR",
-                value=p[3][2],  # Store the list value dictionary
+                token_type="LIST",
+                value=[0] * list_size,
             )
         else:
-            # Regular variable assignment
-            value = p[3] if isinstance(p[3], (int, float, str)) else None
+            print(p[3])
+            value = p[3] if isinstance(p[3], (int, float)) else None
             self.symbol_table.insert(
                 lexeme=p[1],
                 line_number=p.lineno(1),
@@ -152,86 +109,73 @@ class SyntaxAnalyzer:
 
     def p_error(self, p):
         if p:
-            symbol = self.symbol_table.lookup(str(p.value))
-            if symbol:
-                self.ast_output.append(
-                    f"SyntaxError at line {symbol.line_number}, pos {symbol.position}"
-                )
-            else:
-                self.ast_output.append(f"Undefined symbol '{p.value}'")
+            raise SyntaxError((p.value, p.lineno, p.lexpos))
         else:
-            self.ast_output.append("Syntax error at EOF")
+            raise SyntaxError("EOF")
 
-    def parse(self, input_text, line_number=1):
-        """Parse input text and return the AST"""
-        try:
-            ast = self.parser.parse(input_text, lexer=self.lexer.lexer)
-            if ast:
-                self.ast_output.append(self._format_ast(ast))
-            return ast
-        except SyntaxError as e:
-            self.ast_output.append(str(e))
-            return None
-        except Exception as e:
-            self.ast_output.append(f"Error at line {line_number}: {str(e)}")
-            return None
+    def _validate_variable(self, var_name, lineno, lexpos):
+        symbol = self.symbol_table.lookup(var_name)
+        if not symbol:
+            raise ValueError(
+                f"Undefined variable '{var_name}' at line {lineno}, pos {lexpos + 1}"
+            )
+        return symbol
+
+    def _validate_list_variable(self, var_name, lineno, lexpos):
+        symbol = self._validate_variable(var_name, lineno, lexpos)
+        if symbol.token_type != "LIST":
+            raise ValueError(
+                f"Variable '{var_name}' is not a list at line {lineno}, pos {lexpos + 1}"
+            )
+        return symbol
+
+    def _validate_list_index(self, list_name, index, size, lineno, lexpos):
+        if not isinstance(index, int):
+            raise ValueError(
+                f"List index must be an integer, got {index} at line {lineno}, pos {lexpos + 1}"
+            )
+        if index < 0 or index >= size:
+            raise ValueError(
+                f"Index {index} out of range for list '{list_name}' of size {size} at line {lineno}, pos {lexpos + 1}"
+            )
 
     def _format_ast(self, ast):
-        """Format AST for output"""
         if isinstance(ast, (int, float)):
             return str(ast)
         elif isinstance(ast, str):
-            symbol = self.symbol_table.lookup(ast)
-            if symbol and symbol.value is not None:
-                return str(symbol.value)
             return ast
         elif isinstance(ast, tuple):
             if ast[0] == "list_decl":
-                return f"(list[{ast[1]}])"
-            elif ast[0] == "list_access":
-                return f"({ast[1]}[{ast[2]}])"
+                return f"(list[({ast[1]})])"
+            elif len(ast) == 4 and ast[1] == "[":
+                return f"([{ast[0]}{ast[2]}])"
             elif ast[0] == "list_assign":
-                return f"({ast[1]}[{ast[2]}]={ast[3]})"
+                return f"({ast[1]}[({ast[2]})]=({ast[3]}))"
             elif ast[0] == "=":
                 return f"({ast[1]}={self._format_ast(ast[2])})"
             else:
                 return f"({self._format_ast(ast[1])}{ast[0]}{self._format_ast(ast[2])})"
         return str(ast)
 
+    def parse(self, input_text):
+        try:
+            ast = self.parser.parse(input_text, lexer=self.lexer.lexer)
+            if ast:
+                formatted_ast = self._format_ast(ast)
+                self.ast_output.append(formatted_ast)
+            return ast
+        except ValueError as e:
+            self.ast_output.append(str(e))
+            return None
+        except SyntaxError as e:
+            val, line_no, pos = e.args[0]
+            self.ast_output.append(f"SyntaxError at line {line_no}, pos {pos + 1}")
+            return None
+        except Exception as e:
+            self.ast_output.append(str(e))
+            return None
+
     def save_parsed_output(self, filename):
-        """Save the parsed output to a file"""
         with open(filename, "w") as f:
             for output in self.ast_output:
                 f.write(f"{output}\n")
-
-
-# def main():
-#     """Test function for the parser"""
-#     analyzer = SyntaxAnalyzer()
-
-#     # Test expressions
-#     test_expressions = [
-#         "23+8",
-#         "2.5 * 0",
-#         "x = 5",
-#         "10 * x",
-#         "x = y",
-#         "x != 5",
-#         "(2 + 5)",
-#         "x = list[2]",
-#     ]
-
-#     print("Testing parser with expressions:")
-#     print("-" * 40)
-
-#     for expr in test_expressions:
-#         print(f"\nParsing: {expr}")
-#         try:
-#             result = analyzer.parse(expr)
-#             print(f"Result: {result}")
-#         except Exception as e:
-#             print(f"Error: {str(e)}")
-
-
-# if __name__ == "__main__":
-#     main()

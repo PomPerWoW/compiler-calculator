@@ -20,12 +20,12 @@ def compile(
                     output_file.write(" ".join(tokens) + "\n")
 
                     # syntax analysis
-                    # try:
-                    #     ast = parser.parse(line.strip(), line_number)
-                    #     if ast:
-                    #         print(f"AST: {ast}, line: {line_number}")
-                    # except Exception as e:
-                    #     print(f"Error in line {line_number}: {str(e)}")
+                    try:
+                        ast = parser.parse(line.strip())
+                        # if ast:
+                        #     print(f"AST: {ast}, line: {line_number}")
+                    except Exception as e:
+                        print(f"Error in line {line_number}: {str(e)}")
 
         lexer.save_symbol_table(symbol_table_path)
         parser.save_parsed_output(grammar_output_path)

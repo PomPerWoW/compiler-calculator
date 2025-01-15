@@ -1,0 +1,10 @@
+(23+8)
+(2.5*0)
+SyntaxError at line 3, pos 2
+(x=5)
+(10*x)
+Undefined variable 'y' at line 6, pos 3
+(x!=5)
+(2+5)
+(x=(list[(2)]))
+(([x0])+([x1]))
