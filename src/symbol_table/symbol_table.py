@@ -54,3 +54,9 @@ class SymbolTable:
                         str(entry.value) if entry.value is not None else "",
                     ]
                 )
+
+    def remove(self, lexeme):
+        # Remove entry with matching lexeme if it exists
+        self.symbols = {
+            key: value for key, value in self.symbols.items() if key != lexeme
+        }

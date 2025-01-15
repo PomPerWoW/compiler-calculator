@@ -1,5 +1,2 @@
 lexeme,line_number,start_pos,length,type,value
-NUM,1,1,3,VAR,NUM
-x,1,7,1,VAR,x
-y,1,2,1,VAR,y
-list,1,4,4,LIST,list
+x,9,10,1,LIST,"[0, 0]"
