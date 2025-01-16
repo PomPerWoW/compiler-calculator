@@ -32,4 +32,7 @@ LBRACKET        \[
 RBRACKET        \]
 
 # Error tokens (any other special symbols)
-ERR             [^a-zA-Z0-9\+\-\*\/\^\=\!\(\)\[\]\s\.]+ 
+ERR             [^a-zA-Z0-9\+\-\*\/\^\=\!\(\)\[\]\s\.]+
+
+# Ignored characters
+IGNORE          [ \t] 

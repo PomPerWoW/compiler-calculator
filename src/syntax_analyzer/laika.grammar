@@ -11,6 +11,7 @@ expression : expression PLUS term
           | expression LESS_THAN_OR_EQUAL term
           | term
           | VAR ASSIGNMENT expression
+          | VAR LBRACKET expression RBRACKET ASSIGNMENT expression
 
 # Terms
 term : term TIMES factor
@@ -24,4 +25,5 @@ factor : INT
        | REAL
        | VAR
        | LIST LBRACKET expression RBRACKET
+       | VAR LBRACKET expression RBRACKET
        | LPAREN expression RPAREN 
