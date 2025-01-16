@@ -71,6 +71,8 @@ class SyntaxAnalyzer:
         self._validate_list_index(
             p[1], p[3], len(symbol.value), p.lineno(1), p.lexpos(1)
         )
+        value = p[6] if isinstance(p[6], int) else None
+        symbol.value[p[3]] = value
 
         if not isinstance(p[6], int):
             raise ValueError(
@@ -96,8 +98,11 @@ class SyntaxAnalyzer:
                 value=[0] * list_size,
             )
         else:
-            print(p[3])
-            value = p[3] if isinstance(p[3], (int, float)) else None
+            value = (
+                p[3]
+                if isinstance(p[3], (int, float))
+                else self._evaluate_expression(p[3])
+            )
             self.symbol_table.insert(
                 lexeme=p[1],
                 line_number=p.lineno(1),
@@ -112,6 +117,42 @@ class SyntaxAnalyzer:
             raise SyntaxError((p.value, p.lineno, p.lexpos))
         else:
             raise SyntaxError("EOF")
+
+    def _evaluate_expression(self, expr):
+        """Evaluate an expression and return its value"""
+        if isinstance(expr, (int, float)):
+            return expr
+        elif isinstance(expr, str):
+            symbol = self.symbol_table.lookup(expr)
+            if symbol and symbol.value is not None:
+                return symbol.value
+            return None
+        elif isinstance(expr, tuple):
+            if expr[0] == "+":
+                return self._evaluate_expression(expr[1]) + self._evaluate_expression(
+                    expr[2]
+                )
+            elif expr[0] == "-":
+                return self._evaluate_expression(expr[1]) - self._evaluate_expression(
+                    expr[2]
+                )
+            elif expr[0] == "*":
+                return self._evaluate_expression(expr[1]) * self._evaluate_expression(
+                    expr[2]
+                )
+            elif expr[0] == "/":
+                return self._evaluate_expression(expr[1]) / self._evaluate_expression(
+                    expr[2]
+                )
+            elif expr[0] == "%":
+                return self._evaluate_expression(expr[1]) % self._evaluate_expression(
+                    expr[2]
+                )
+            elif expr[0] == "^":
+                return self._evaluate_expression(expr[1]) ** self._evaluate_expression(
+                    expr[2]
+                )
+        return None
 
     def _validate_variable(self, var_name, lineno, lexpos):
         symbol = self.symbol_table.lookup(var_name)

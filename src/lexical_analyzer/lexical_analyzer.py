@@ -86,15 +86,6 @@ class LexicalAnalyzer:
         print(f"Illegal character '{t.value[0]}'")
         t.lexer.skip(1)
 
-    def _handle_list_declaration(self, tok, current_var, list_size):
-        self.symbol_table.insert(
-            lexeme=current_var,
-            line_number=tok.lineno,
-            position=tok.lexpos,
-            token_type="LIST",
-            value=[0] * list_size,
-        )
-
     def _handle_variable_assignment(self, tok, current_var, value):
         self.symbol_table.insert(
             lexeme=current_var,
@@ -102,6 +93,15 @@ class LexicalAnalyzer:
             position=tok.lexpos,
             token_type="VAR",
             value=value,
+        )
+
+    def _handle_list_declaration(self, tok, current_var, list_size):
+        self.symbol_table.insert(
+            lexeme=current_var,
+            line_number=tok.lineno,
+            position=tok.lexpos,
+            token_type="LIST",
+            value=[0] * list_size,
         )
 
     def tokenize(self, expression, line_number):
@@ -115,6 +115,7 @@ class LexicalAnalyzer:
         is_assignment = False
         has_value = False
         value = None
+        is_list_access = False
 
         while True:
             tok = self.lexer.token()
@@ -135,13 +136,15 @@ class LexicalAnalyzer:
                 case "INT":
                     if is_list_declaration:
                         list_size = tok.value
-                    elif is_assignment:
+                    elif is_assignment and not is_list_access:
                         has_value = True
                         value = tok.value
                 case "REAL":
                     if is_assignment:
                         has_value = True
                         value = tok.value
+                case "LBRACKET":
+                    is_list_access = True
                 case "RBRACKET":
                     if is_list_declaration and current_var and list_size is not None:
                         self._handle_list_declaration(tok, current_var, list_size)
@@ -151,13 +154,21 @@ class LexicalAnalyzer:
                         is_assignment = False
                         has_value = False
                         value = None
+                        is_list_access = False
 
-            if not is_list_declaration and current_var and is_assignment and has_value:
+            if (
+                not is_list_declaration
+                and current_var
+                and is_assignment
+                and has_value
+                and is_list_access
+            ):
                 self._handle_variable_assignment(tok, current_var, value)
                 current_var = None
                 is_assignment = False
                 has_value = False
                 value = None
+                is_list_access = False
 
             tokens.append(f"{tok.value}/{tok.type}")
 
