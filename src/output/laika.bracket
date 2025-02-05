@@ -7,10 +7,10 @@ Undefined variable 'y' at line 6, pos 3
 (x!=5)
 (2+5)
 (x=(list[(2)]))
-(([x0])+([x1]))
+((x[(0)])+(x[(1)]))
 Index 4 out of range for list 'x' of size 2 at line 11, pos 1
-(x[(1)]=(2))
-(([x0])+2)
+((x[(1)])=2)
+((x[(0)])+2)
 (z=(3+2))
 (d=(3*2))
 (e=(3/2))

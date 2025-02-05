@@ -6,7 +6,7 @@ _tabversion = '3.10'
 
 _lr_method = 'LALR'
 
-_lr_signature = 'ASSIGNMENT DIVIDE EQUAL_TO ERR GREATER_THAN GREATER_THAN_OR_EQUAL INT INTEGER_DIVISION LBRACKET LESS_THAN LESS_THAN_OR_EQUAL LIST LPAREN MINUS NOT_EQUAL PLUS POW RBRACKET REAL RPAREN TIMES VAR\n        expression : expression PLUS term\n                  | expression MINUS term\n                  | expression EQUAL_TO term\n                  | expression NOT_EQUAL term\n                  | expression GREATER_THAN term\n                  | expression GREATER_THAN_OR_EQUAL term\n                  | expression LESS_THAN term\n                  | expression LESS_THAN_OR_EQUAL term\n        expression : term\n        term : term TIMES factor\n             | term DIVIDE factor\n             | term INTEGER_DIVISION factor\n             | term POW factor\n        term : factor\n        factor : INT\n              | REAL\n        factor : VARfactor : LIST LBRACKET expression RBRACKETfactor : VAR LBRACKET expression RBRACKETexpression : VAR LBRACKET expression RBRACKET ASSIGNMENT expressionfactor : LPAREN expression RPARENexpression : VAR ASSIGNMENT expression'
+_lr_signature = 'ASSIGNMENT DIVIDE EQUAL_TO ERR GREATER_THAN GREATER_THAN_OR_EQUAL INT INTEGER_DIVISION LBRACKET LESS_THAN LESS_THAN_OR_EQUAL LIST LPAREN MINUS NOT_EQUAL PLUS POW RBRACKET REAL RPAREN TIMES VAR\nexpression : expression PLUS term\n          | expression MINUS term\n          | expression EQUAL_TO term\n          | expression NOT_EQUAL term\n          | expression GREATER_THAN term\n          | expression GREATER_THAN_OR_EQUAL term\n          | expression LESS_THAN term\n          | expression LESS_THAN_OR_EQUAL term\nexpression : term\nterm : term TIMES factor\n     | term DIVIDE factor\n     | term INTEGER_DIVISION factor\n     | term POW factor\nterm : factor\nfactor : INT\n      | REAL\nfactor : VARfactor : LIST LBRACKET expression RBRACKETfactor : VAR LBRACKET expression RBRACKETexpression : VAR LBRACKET expression RBRACKET ASSIGNMENT expressionfactor : LPAREN expression RPARENexpression : VAR ASSIGNMENT expression'
     
 _lr_action_items = {'VAR':([0,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,42,46,],[3,3,26,26,26,26,26,26,26,26,26,26,26,26,3,3,3,3,3,]),'INT':([0,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,42,46,],[5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,]),'REAL':([0,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,42,46,],[6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,]),'LIST':([0,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,42,46,],[7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,]),'LPAREN':([0,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,42,46,],[8,8,8,8,8,8,8,8,8,8,8,8,8,8,8,8,8,8,8,]),'$end':([1,2,3,4,5,6,25,26,27,28,29,30,31,32,33,34,35,36,37,39,41,43,44,47,48,],[0,-9,-17,-14,-15,-16,-1,-17,-2,-3,-4,-5,-6,-7,-8,-10,-11,-12,-13,-22,-21,-19,-18,-19,-20,]),'PLUS':([1,2,3,4,5,6,24,25,26,27,28,29,30,31,32,33,34,35,36,37,38,39,40,41,43,44,45,47,48,],[9,-9,-17,-14,-15,-16,9,-1,-17,-2,-3,-4,-5,-6,-7,-8,-10,-11,-12,-13,9,9,9,-21,-19,-18,9,-19,9,]),'MINUS':([1,2,3,4,5,6,24,25,26,27,28,29,30,31,32,33,34,35,36,37,38,39,40,41,43,44,45,47,48,],[10,-9,-17,-14,-15,-16,10,-1,-17,-2,-3,-4,-5,-6,-7,-8,-10,-11,-12,-13,10,10,10,-21,-19,-18,10,-19,10,]),'EQUAL_TO':([1,2,3,4,5,6,24,25,26,27,28,29,30,31,32,33,34,35,36,37,38,39,40,41,43,44,45,47,48,],[11,-9,-17,-14,-15,-16,11,-1,-17,-2,-3,-4,-5,-6,-7,-8,-10,-11,-12,-13,11,11,11,-21,-19,-18,11,-19,11,]),'NOT_EQUAL':([1,2,3,4,5,6,24,25,26,27,28,29,30,31,32,33,34,35,36,37,38,39,40,41,43,44,45,47,48,],[12,-9,-17,-14,-15,-16,12,-1,-17,-2,-3,-4,-5,-6,-7,-8,-10,-11,-12,-13,12,12,12,-21,-19,-18,12,-19,12,]),'GREATER_THAN':([1,2,3,4,5,6,24,25,26,27,28,29,30,31,32,33,34,35,36,37,38,39,40,41,43,44,45,47,48,],[13,-9,-17,-14,-15,-16,13,-1,-17,-2,-3,-4,-5,-6,-7,-8,-10,-11,-12,-13,13,13,13,-21,-19,-18,13,-19,13,]),'GREATER_THAN_OR_EQUAL':([1,2,3,4,5,6,24,25,26,27,28,29,30,31,32,33,34,35,36,37,38,39,40,41,43,44,45,47,48,],[14,-9,-17,-14,-15,-16,14,-1,-17,-2,-3,-4,-5,-6,-7,-8,-10,-11,-12,-13,14,14,14,-21,-19,-18,14,-19,14,]),'LESS_THAN':([1,2,3,4,5,6,24,25,26,27,28,29,30,31,32,33,34,35,36,37,38,39,40,41,43,44,45,47,48,],[15,-9,-17,-14,-15,-16,15,-1,-17,-2,-3,-4,-5,-6,-7,-8,-10,-11,-12,-13,15,15,15,-21,-19,-18,15,-19,15,]),'LESS_THAN_OR_EQUAL':([1,2,3,4,5,6,24,25,26,27,28,29,30,31,32,33,34,35,36,37,38,39,40,41,43,44,45,47,48,],[16,-9,-17,-14,-15,-16,16,-1,-17,-2,-3,-4,-5,-6,-7,-8,-10,-11,-12,-13,16,16,16,-21,-19,-18,16,-19,16,]),'RPAREN':([2,3,4,5,6,24,25,26,27,28,29,30,31,32,33,34,35,36,37,39,41,43,44,47,48,],[-9,-17,-14,-15,-16,41,-1,-17,-2,-3,-4,-5,-6,-7,-8,-10,-11,-12,-13,-22,-21,-19,-18,-19,-20,]),'RBRACKET':([2,3,4,5,6,25,26,27,28,29,30,31,32,33,34,35,36,37,38,39,40,41,43,44,45,47,48,],[-9,-17,-14,-15,-16,-1,-17,-2,-3,-4,-5,-6,-7,-8,-10,-11,-12,-13,43,-22,44,-21,-19,-18,47,-19,-20,]),'TIMES':([2,3,4,5,6,25,26,27,28,29,30,31,32,33,34,35,36,37,41,43,44,47,],[17,-17,-14,-15,-16,17,-17,17,17,17,17,17,17,17,-10,-11,-12,-13,-21,-19,-18,-19,]),'DIVIDE':([2,3,4,5,6,25,26,27,28,29,30,31,32,33,34,35,36,37,41,43,44,47,],[18,-17,-14,-15,-16,18,-17,18,18,18,18,18,18,18,-10,-11,-12,-13,-21,-19,-18,-19,]),'INTEGER_DIVISION':([2,3,4,5,6,25,26,27,28,29,30,31,32,33,34,35,36,37,41,43,44,47,],[19,-17,-14,-15,-16,19,-17,19,19,19,19,19,19,19,-10,-11,-12,-13,-21,-19,-18,-19,]),'POW':([2,3,4,5,6,25,26,27,28,29,30,31,32,33,34,35,36,37,41,43,44,47,],[20,-17,-14,-15,-16,20,-17,20,20,20,20,20,20,20,-10,-11,-12,-13,-21,-19,-18,-19,]),'LBRACKET':([3,7,26,],[21,23,42,]),'ASSIGNMENT':([3,43,],[22,46,]),}
 
@@ -27,26 +27,26 @@ for _k, _v in _lr_goto_items.items():
 del _lr_goto_items
 _lr_productions = [
   ("S' -> expression","S'",1,None,None,None),
-  ('expression -> expression PLUS term','expression',3,'p_expression_binary','syntax_analyzer.py',16),
-  ('expression -> expression MINUS term','expression',3,'p_expression_binary','syntax_analyzer.py',17),
-  ('expression -> expression EQUAL_TO term','expression',3,'p_expression_binary','syntax_analyzer.py',18),
-  ('expression -> expression NOT_EQUAL term','expression',3,'p_expression_binary','syntax_analyzer.py',19),
-  ('expression -> expression GREATER_THAN term','expression',3,'p_expression_binary','syntax_analyzer.py',20),
-  ('expression -> expression GREATER_THAN_OR_EQUAL term','expression',3,'p_expression_binary','syntax_analyzer.py',21),
-  ('expression -> expression LESS_THAN term','expression',3,'p_expression_binary','syntax_analyzer.py',22),
-  ('expression -> expression LESS_THAN_OR_EQUAL term','expression',3,'p_expression_binary','syntax_analyzer.py',23),
-  ('expression -> term','expression',1,'p_expression_term','syntax_analyzer.py',28),
-  ('term -> term TIMES factor','term',3,'p_term_binary','syntax_analyzer.py',33),
-  ('term -> term DIVIDE factor','term',3,'p_term_binary','syntax_analyzer.py',34),
-  ('term -> term INTEGER_DIVISION factor','term',3,'p_term_binary','syntax_analyzer.py',35),
-  ('term -> term POW factor','term',3,'p_term_binary','syntax_analyzer.py',36),
-  ('term -> factor','term',1,'p_term_factor','syntax_analyzer.py',41),
-  ('factor -> INT','factor',1,'p_factor_number','syntax_analyzer.py',46),
-  ('factor -> REAL','factor',1,'p_factor_number','syntax_analyzer.py',47),
-  ('factor -> VAR','factor',1,'p_factor_var','syntax_analyzer.py',52),
-  ('factor -> LIST LBRACKET expression RBRACKET','factor',4,'p_factor_list_declaration','syntax_analyzer.py',63),
-  ('factor -> VAR LBRACKET expression RBRACKET','factor',4,'p_factor_list_access','syntax_analyzer.py',77),
-  ('expression -> VAR LBRACKET expression RBRACKET ASSIGNMENT expression','expression',6,'p_assignment_list_element','syntax_analyzer.py',99),
-  ('factor -> LPAREN expression RPAREN','factor',3,'p_factor_expr','syntax_analyzer.py',127),
-  ('expression -> VAR ASSIGNMENT expression','expression',3,'p_assignment','syntax_analyzer.py',131),
+  ('expression -> expression PLUS term','expression',3,'p_expression_binary','syntax_analyzer.py',14),
+  ('expression -> expression MINUS term','expression',3,'p_expression_binary','syntax_analyzer.py',15),
+  ('expression -> expression EQUAL_TO term','expression',3,'p_expression_binary','syntax_analyzer.py',16),
+  ('expression -> expression NOT_EQUAL term','expression',3,'p_expression_binary','syntax_analyzer.py',17),
+  ('expression -> expression GREATER_THAN term','expression',3,'p_expression_binary','syntax_analyzer.py',18),
+  ('expression -> expression GREATER_THAN_OR_EQUAL term','expression',3,'p_expression_binary','syntax_analyzer.py',19),
+  ('expression -> expression LESS_THAN term','expression',3,'p_expression_binary','syntax_analyzer.py',20),
+  ('expression -> expression LESS_THAN_OR_EQUAL term','expression',3,'p_expression_binary','syntax_analyzer.py',21),
+  ('expression -> term','expression',1,'p_expression_term','syntax_analyzer.py',26),
+  ('term -> term TIMES factor','term',3,'p_term_binary','syntax_analyzer.py',31),
+  ('term -> term DIVIDE factor','term',3,'p_term_binary','syntax_analyzer.py',32),
+  ('term -> term INTEGER_DIVISION factor','term',3,'p_term_binary','syntax_analyzer.py',33),
+  ('term -> term POW factor','term',3,'p_term_binary','syntax_analyzer.py',34),
+  ('term -> factor','term',1,'p_term_factor','syntax_analyzer.py',39),
+  ('factor -> INT','factor',1,'p_factor_number','syntax_analyzer.py',44),
+  ('factor -> REAL','factor',1,'p_factor_number','syntax_analyzer.py',45),
+  ('factor -> VAR','factor',1,'p_factor_var','syntax_analyzer.py',50),
+  ('factor -> LIST LBRACKET expression RBRACKET','factor',4,'p_factor_list_declaration','syntax_analyzer.py',55),
+  ('factor -> VAR LBRACKET expression RBRACKET','factor',4,'p_factor_list_access','syntax_analyzer.py',61),
+  ('expression -> VAR LBRACKET expression RBRACKET ASSIGNMENT expression','expression',6,'p_assignment_list_element','syntax_analyzer.py',69),
+  ('factor -> LPAREN expression RPAREN','factor',3,'p_factor_expr','syntax_analyzer.py',86),
+  ('expression -> VAR ASSIGNMENT expression','expression',3,'p_assignment','syntax_analyzer.py',90),
 ]

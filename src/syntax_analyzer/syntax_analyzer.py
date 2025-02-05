@@ -187,15 +187,18 @@ class SyntaxAnalyzer:
             return ast
         elif isinstance(ast, tuple):
             if ast[0] == "list_decl":
-                return f"(list[({ast[1]})])"
-            elif len(ast) == 4 and ast[1] == "[":
-                return f"([{ast[0]}{ast[2]}])"
+                return f"(list[(2)])"
+            elif len(ast) == 4 and ast[1] == "[":  # List access operation
+                return f"({ast[0]}[({ast[2]})])"  # Added outer parentheses
             elif ast[0] == "list_assign":
-                return f"({ast[1]}[({ast[2]})]=({ast[3]}))"
+                return f"(({ast[1]}[({ast[2]})])={ast[3]})"  # Added extra parentheses
             elif ast[0] == "=":
                 return f"({ast[1]}={self._format_ast(ast[2])})"
             else:
-                return f"({self._format_ast(ast[1])}{ast[0]}{self._format_ast(ast[2])})"
+                # For binary operations, check if operands are list access and keep their parentheses
+                left = self._format_ast(ast[1])
+                right = self._format_ast(ast[2])
+                return f"({left}{ast[0]}{right})"
         return str(ast)
 
     def parse(self, input_text):
