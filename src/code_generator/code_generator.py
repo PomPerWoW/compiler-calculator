@@ -258,37 +258,37 @@ SyntaxError at line 3, pos 2
 Undefined variable 'y' at line 6, pos 3
 (x!=5)
 (2+5)
+(x=(list[(2)]))
+((x[(0)])+(x[(1)]))
+Index 4 out of range for list 'x' of size 2 at line 11, pos 1
+((x[(1)])=2)
+((x[(0)])+2)
+(z=(3+2))
+(d=(3*2))
+(e=(3/2))
+SyntaxError at line 17, pos 7
+(g=2)
 """
-# (x=(list[(2)]))
-# (([x0])+([x1]))
-# Index 4 out of range for list 'x' of size 2 at line 11, pos 1
-# (x[(1)]=(2))
-# (([x0])+2)
-# (z=(3+2))
-# (d=(3*2))
-# (e=(3/2))
-# SyntaxError at line 17, pos 7
-# (g=2)"""
 
 tokenized_output = [
-    "23/INT +/PLUS 8/INT",
-    "2.5/REAL */TIMES 0/INT",
-    "5/INT NUM/VAR ^/POW 3.0/REAL",
-    "x/VAR =/ASSIGNMENT 5/INT",
-    "10/INT */TIMES x/VAR",
-    "x/VAR =/ASSIGNMENT y/VAR",
-    "x/VAR !=/NOT_EQUAL 5/INT",
-    "(/LPAREN 2/INT +/PLUS 5/INT )/RPAREN",
-    # "x/VAR =/ASSIGNMENT list/LIST [/LBRACKET 2/INT ]/RBRACKET",
-    # "x/VAR [/LBRACKET 0/INT ]/RBRACKET +/PLUS x/VAR [/LBRACKET 1/INT ]/RBRACKET",
-    # "x/VAR [/LBRACKET 4/INT ]/RBRACKET",
-    # "x/VAR [/LBRACKET 1/INT ]/RBRACKET =/ASSIGNMENT 2/INT",
-    # "x/VAR [/LBRACKET 0/INT ]/RBRACKET +/PLUS 2/INT",
-    # "z/VAR =/ASSIGNMENT 3/INT +/PLUS 2/INT",
-    # "d/VAR =/ASSIGNMENT 3/INT */TIMES 2/INT",
-    # "e/VAR =/ASSIGNMENT 3/INT //DIVIDE 2/INT",
-    # "f/VAR =/ASSIGNMENT 3/INT %/ERR 2/INT",
-    # "g/VAR =/ASSIGNMENT 2/INT"
+"23/INT +/PLUS 8/INT",
+"2.5/REAL */TIMES 0/INT",
+"5/INT NUM/VAR ^/POW 3.0/REAL",
+"x/VAR =/ASSIGNMENT 5/INT",
+"10/INT */TIMES x/VAR",
+"x/VAR =/ASSIGNMENT y/VAR",
+"x/VAR !=/NOT_EQUAL 5/INT",
+"(/LPAREN 2/INT +/PLUS 5/INT )/RPAREN",
+"x/VAR =/ASSIGNMENT list/LIST [/LBRACKET 2/INT ]/RBRACKET",
+"x/VAR [/LBRACKET 0/INT ]/RBRACKET +/PLUS x/VAR [/LBRACKET 1/INT ]/RBRACKET",
+"x/VAR [/LBRACKET 4/INT ]/RBRACKET",
+"x/VAR [/LBRACKET 1/INT ]/RBRACKET =/ASSIGNMENT 2/INT",
+"x/VAR [/LBRACKET 0/INT ]/RBRACKET +/PLUS 2/INT",
+"z/VAR =/ASSIGNMENT 3/INT +/PLUS 2/INT",
+"d/VAR =/ASSIGNMENT 3/INT */TIMES 2/INT",
+"e/VAR =/ASSIGNMENT 3/INT //DIVIDE 2/INT",
+"f/VAR =/ASSIGNMENT 3/INT %/ERR 2/INT",
+"g/VAR =/ASSIGNMENT 2/INT",
 ]
 
 parsed_output_test = """
@@ -308,8 +308,8 @@ tokenized_output_test = [
 ]
 
 generator = CodeGenerator(symbol_table)
-assembly = generator.generate(parsed_output_test, tokenized_output_test)
-# assembly = generator.generate(parsed_output, tokenized_output)
+# assembly = generator.generate(parsed_output_test, tokenized_output_test)
+assembly = generator.generate(parsed_output, tokenized_output)
 print("\n".join(assembly))
 
 # LD R0 #23
