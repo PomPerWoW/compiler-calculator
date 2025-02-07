@@ -749,10 +749,15 @@ class CodeGenerator:
         self.assembly_code.append(f'LD {r_scalar} #{scalar}')
         self.assembly_code.append(f'ADD.i {r_result} {r_value} {r_scalar}')
         self.assembly_code.append(f'ST @print {r_result}')
-    
+        
+    def save_assembly(self, filename):
+        """Save generated assembly code to a file."""
+        with open(filename, "w") as f:
+            for line in self.assembly_code:
+                f.write(f"{line}\n")
 
 # # Example usage
-symbol_table = {"x": "LIST", "z": "VAR", "d": "VAR", "e": "VAR", "g": "VAR"}
+# symbol_table = {"x": "LIST", "z": "VAR", "d": "VAR", "e": "VAR", "g": "VAR"}
 # parsed_output = """
 #     (23+8)
 #     (2.5*0)
@@ -800,15 +805,15 @@ symbol_table = {"x": "LIST", "z": "VAR", "d": "VAR", "e": "VAR", "g": "VAR"}
 
 # ]
 
-parsed_output_test = """
-    (g=(((1+2)+3)+4))
-"""
+# parsed_output_test = """
+#     (g=(((1+2)+3)+4))
+# """
 
-tokenized_output_test = [
-    "g/VAR =/ASSIGNMENT 1/INT +/PLUS 2/INT +/PLUS 3/INT +/PLUS 4/INT"
-]
+# tokenized_output_test = [
+#     "g/VAR =/ASSIGNMENT 1/INT +/PLUS 2/INT +/PLUS 3/INT +/PLUS 4/INT"
+# ]
 
-generator = CodeGenerator(symbol_table)
-assembly = generator.generate(parsed_output_test, tokenized_output_test)
-# assembly = generator.generate(parsed_output, tokenized_output)
-print("\n".join(assembly))
+# generator = CodeGenerator(symbol_table)
+# assembly = generator.generate(parsed_output_test, tokenized_output_test)
+# # assembly = generator.generate(parsed_output, tokenized_output)
+# print("\n".join(assembly))
