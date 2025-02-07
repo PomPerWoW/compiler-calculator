@@ -766,9 +766,15 @@ class CodeGenerator:
         self.assembly_code.append(f"ADD.i {r_result} {r_value} {r_scalar}")
         self.assembly_code.append(f"ST @print {r_result}")
 
+    def save_assembly(self, filename):
+        """Save generated assembly code to a file."""
+        with open(filename, "w") as f:
+            for line in self.assembly_code:
+                f.write(f"{line}\n")
+
 
 # # Example usage
-symbol_table = {"x": "LIST", "z": "VAR", "d": "VAR", "e": "VAR", "g": "VAR"}
+# symbol_table = {"x": "LIST", "z": "VAR", "d": "VAR", "e": "VAR", "g": "VAR"}
 # parsed_output = """
 #     (23+8)
 #     (2.5*0)
