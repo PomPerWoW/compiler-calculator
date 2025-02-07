@@ -176,3 +176,9 @@ class LexicalAnalyzer:
 
     def save_symbol_table(self, filename):
         self.symbol_table.save_to_csv(filename)
+
+    def get_symbol_table(self):
+        return self.symbol_table
+    
+    def get_symbol_table_as_dict(self):
+        return self.symbol_table.get_as_dict()

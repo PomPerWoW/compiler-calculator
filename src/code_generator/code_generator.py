@@ -316,27 +316,27 @@ class CodeGenerator:
         r_addr = self.get_register()   # R5 in original
         
         # Load 0 into first register (value to initialize list elements with)
-        self.assembly_code.append(f'LD {r_value} #0    // load 0, list {var_name}[{size}] we should set {var_name}[0] and {var_name}[1] to 0')
+        self.assembly_code.append(f'LD {r_value} #0')
         
         # Load base address of list
-        self.assembly_code.append(f'LD {r_base} @{var_name}    // load base address of {var_name}')
+        self.assembly_code.append(f'LD {r_base} @{var_name}')
         
         # Initialize each element to 0
         for i in range(int(size)):
             # Load current index
-            self.assembly_code.append(f'LD {r_index} #{i}    // load offset {i}')
+            self.assembly_code.append(f'LD {r_index} #{i}')
             
             # Load element size (4 bytes)
-            self.assembly_code.append(f'LD {r_size} #4    // size = 4 bytes')
+            self.assembly_code.append(f'LD {r_size} #4')
             
             # Calculate offset
-            self.assembly_code.append(f'MUL.i {r_offset} {r_index} {r_size}    // offset * size')
+            self.assembly_code.append(f'MUL.i {r_offset} {r_index} {r_size}')
             
             # Calculate address
-            self.assembly_code.append(f'ADD.i {r_addr} {r_base} {r_offset}    // {var_name}[{i}] address')
+            self.assembly_code.append(f'ADD.i {r_addr} {r_base} {r_offset}')
             
             # Store 0 at calculated address
-            self.assembly_code.append(f'ST {r_addr} {r_value}    // {var_name}[{i}] = 0')
+            self.assembly_code.append(f'ST {r_addr} {r_value}')
 
     
 # Example usage
@@ -351,6 +351,7 @@ parsed_output = """
     (x!=5)
     (2+5)
     (x=(list[(2)]))
+    (x[(1)])
     ((x[(0)])+(x[(1)]))
     Index 4 out of range for list 'x' of size 2 at line 11, pos 1
     ((x[(1)])=2)
@@ -372,6 +373,7 @@ tokenized_output = [
     "x/VAR !=/NOT_EQUAL 5/INT",
     "(/LPAREN 2/INT +/PLUS 5/INT )/RPAREN",
     "x/VAR =/ASSIGNMENT list/LIST [/LBRACKET 2/INT ]/RBRACKET",
+    "x/VAR [/LBRACKET 1/INT ]/RBRACKET",
     "x/VAR [/LBRACKET 0/INT ]/RBRACKET +/PLUS x/VAR [/LBRACKET 1/INT ]/RBRACKET",
     "x/VAR [/LBRACKET 4/INT ]/RBRACKET",
     "x/VAR [/LBRACKET 1/INT ]/RBRACKET =/ASSIGNMENT 2/INT",
@@ -384,11 +386,11 @@ tokenized_output = [
 ]
 
 parsed_output_test = """
-    (2+5)
+    (x[(1)])
 """
 
 tokenized_output_test = [
-    "(/LPAREN 2/INT +/PLUS 5/INT )/RPAREN",
+    "x/VAR [/LBRACKET 1/INT ]/RBRACKET",
 ]
 
 generator = CodeGenerator(symbol_table)

@@ -223,3 +223,9 @@ class SyntaxAnalyzer:
         with open(filename, "w") as f:
             for output in self.ast_output:
                 f.write(f"{output}\n")
+
+    def get_parsed_output(self):
+        return self.ast_output
+    
+    def get_parsed_output_as_str(self):
+        return "\n".join(self.ast_output)

@@ -426,16 +426,16 @@ tokenized_output = [
 ]
 
 parsed_output_test = """
-    (2+5)
+    (x=(list[(2)]))
 """
 
 tokenized_output_test = [
-    "(/LPAREN 2/INT +/PLUS 5/INT )/RPAREN",
+    "x/VAR =/ASSIGNMENT list/LIST [/LBRACKET 2/INT ]/RBRACKET",
 ]
 
 generator = CodeGenerator(symbol_table)
-# assembly = generator.generate(parsed_output_test, tokenized_output_test)
-assembly = generator.generate(parsed_output, tokenized_output)
+assembly = generator.generate(parsed_output_test, tokenized_output_test)
+# assembly = generator.generate(parsed_output, tokenized_output)
 print("\n".join(assembly))
 
 # LD R0 #23

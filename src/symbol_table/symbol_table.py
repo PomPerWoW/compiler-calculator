@@ -60,3 +60,8 @@ class SymbolTable:
         self.symbols = {
             key: value for key, value in self.symbols.items() if key != lexeme
         }
+
+    def get_as_dict(self):
+        # symbol_table = {"x": "LIST", "z": "VAR", "d": "VAR", "e": "VAR", "g": "VAR"}
+        return {key: value.token_type for key, value in self.symbols.items()}
+    
