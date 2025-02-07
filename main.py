@@ -29,9 +29,6 @@ def compile(
                     # syntax analysis
                     try:
                         ast = parser.parse(line.strip())
-                        # if ast:
-                        #     print(f"AST: {ast}, line: {line_number}")
-
                         # generator = CodeGenerator(symbol_table)
                         # # assembly = generator.generate(parsed_output_test, tokenized_output_test)
                         # assembly = code_generator.generate(ast, tokens)
@@ -41,29 +38,11 @@ def compile(
         lexer.save_symbol_table(symbol_table_path)
         parser.save_parsed_output(grammar_output_path)
 
-        # print("Parser AST: ", type(parser.ast_output))
-        # print("Lexer Tokens: ", type(lexer.get_symbol_table_as_dict()))
-        symbol_table = lexer.get_symbol_table_as_dict()
-        parse_output = parser.get_parsed_output_as_str()
-        # print("symbol_table: ", symbol_table)
-        # print("Parser AST: ", parse_output)
-        # print("Tokenized Output: ", tokenized_output)
-        # print("ufckadsfasdf\n\n")
-        # print(type(parse_output))
-        # print(symbol_table)
+        # symbol_table = lexer.get_symbol_table_as_dict()
+        # parse_output = parser.get_parsed_output_as_str()
 
-        code_generator = CodeGenerator(symbol_table)
-        print("ufckadsfasdf")
-
-        # print("parse_output: ", parse_output)
-        # print("tokenized_output: ", type(tokenized_output))
-        # print(len(tokenized_output))
-
-        # print("ufckadsfasdf")
-        code_generator.generate(parse_output, tokenized_output)
-
-        # print("ufckadsfasdf")
-        # code_generator.save_assembly("src/output/laika.asm")
+        # code_generator = CodeGenerator(symbol_table)
+        # code_generator.generate(parse_output, tokenized_output)
 
     except FileNotFoundError:
         print(f"Error: Could not find input file {input_path}")

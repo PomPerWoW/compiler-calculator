@@ -27,19 +27,19 @@ class LexicalAnalyzer:
         "ERR",
     )
 
+    t_GREATER_THAN_OR_EQUAL = r">="
+    t_LESS_THAN_OR_EQUAL = r"<="
+    t_GREATER_THAN = r">"
+    t_LESS_THAN = r"<"
+    t_EQUAL_TO = r"=="
+    t_NOT_EQUAL = r"!="
+    t_ASSIGNMENT = r"="
     t_PLUS = r"\+"
-    t_MINUS = r"\-"
+    t_MINUS = r"-"
     t_TIMES = r"\*"
+    t_INTEGER_DIVISION = r"//"  # Put this before regular division
     t_DIVIDE = r"/"
-    t_INTEGER_DIVISION = r"//"
     t_POW = r"\^"
-    t_ASSIGNMENT = r"\="
-    t_EQUAL_TO = r"\=="
-    t_NOT_EQUAL = r"\!="
-    t_GREATER_THAN = r"\>"
-    t_GREATER_THAN_OR_EQUAL = r"\>="
-    t_LESS_THAN = r"\<"
-    t_LESS_THAN_OR_EQUAL = r"\<="
     t_LPAREN = r"\("
     t_RPAREN = r"\)"
     t_LBRACKET = r"\["
@@ -47,6 +47,7 @@ class LexicalAnalyzer:
 
     t_ignore = " \t"
 
+    # Rest of the class implementation remains the same...
     def __init__(self, symbol_table):
         self.symbol_table = symbol_table
         self.current_line = 1
@@ -75,7 +76,7 @@ class LexicalAnalyzer:
         return t
 
     def t_ERR(self, t):
-        r"[^a-zA-Z0-9\+\-\*\/\^\=\!\(\)\[\]\s\.]+"
+        r"[^a-zA-Z0-9\+\-\*\/\^\=\!\(\)\[\]\s\.<>]+"
         return t
 
     def t_newline(self, t):
@@ -179,6 +180,6 @@ class LexicalAnalyzer:
 
     def get_symbol_table(self):
         return self.symbol_table
-    
+
     def get_symbol_table_as_dict(self):
         return self.symbol_table.get_as_dict()
