@@ -18,8 +18,3 @@ Index 4 out of range for list 'x' of size 2 at line 12, pos 1
 SyntaxError at line 18, pos 7
 (g=2)
 (1-2)
-(1>2)
-(1>=2)
-(1<2)
-(1<=2)
-(1==1)

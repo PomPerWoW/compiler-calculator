@@ -109,3 +109,8 @@ ERROR
 LD R0 #2
 ST @g R0
 
+LD R0 #1
+LD R1 #2
+SUB.i R2 R0 R1
+ST @print R2
+

@@ -41,10 +41,8 @@ class CodeGenerator:
                 self.assembly_code.append("ERROR\n")
                 continue
 
-            print("เหี้ย")
             token_list = tokens.split()
             parsed_line = parsed_lines[i].strip()
-            print("ผ่าน")
 
             try:
                 # First check for explicit parentheses tokens
@@ -70,6 +68,17 @@ class CodeGenerator:
                         self._handle_exponentiation(inner_tokens)
                     elif "MINUS" in tokens:
                         self._handle_subtraction(inner_tokens)
+                    elif "GREATER_THAN" in tokens:
+                        self._handle_greater_than(inner_tokens)
+                    elif "LESS_THAN" in tokens:
+                        self._handle_less_than(inner_tokens)
+                    elif "GREATER_THAN_EQUAL" in tokens:
+                        self._handle_greater_than_equal(inner_tokens)
+                    elif "LESS_THAN_EQUAL" in tokens:
+                        self._handle_less_than_equal(inner_tokens)
+                    elif "EQUAL_TO" in tokens:
+                        self._handle_equal(inner_tokens)
+                        
                 # Then check for compound expressions
                 elif (
                     parsed_line.startswith("(")
@@ -132,6 +141,25 @@ class CodeGenerator:
                 ops.append("TIMES")
             elif "/DIVIDE" in token:
                 ops.append("DIVIDE")
+            elif "/NOT_EQUAL" in token:
+                ops.append("NOT_EQUAL")
+            elif "/EXP" in token:
+                ops.append("EXP")
+            elif "/INTEGER_DIVIDE" in token:
+                ops.append("INTEGER_DIVIDE")
+            elif "/MINUS" in token:
+                ops.append("MINUS")
+            elif "/GREATER_THAN" in token:
+                ops.append("GREATER_THAN")
+            elif "/LESS_THAN" in token:
+                ops.append("LESS_THAN")
+            elif "/GREATER_THAN_EQUAL" in token:
+                ops.append("GREATER_THAN_EQUAL")
+            elif "/LESS_THAN_EQUAL" in token:
+                ops.append("LESS_THAN_EQUAL")
+            elif "/EQUAL_TO" in token:
+                ops.append("EQUAL_TO")
+            
 
         # Ensure we process from left to right
         r_left = self.get_register()
@@ -267,7 +295,8 @@ class CodeGenerator:
                 self.assembly_code.append(f"LD {r_right} {self._load_value(right_val)}")
                 self.assembly_code.append(f"SUB.i {r_result} {r_left} {r_right}")
                 self.assembly_code.append(f"ST @{var_name} {r_result}")
-
+            
+            
             else:
                 # Simple assignment
                 value = right_tokens[0].split("/")[0]
