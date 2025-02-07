@@ -5,29 +5,33 @@ from src.code_generator.code_generator_new import CodeGenerator
 
 
 def compile(
-    input_path, tok_output_path, grammar_output_path, symbol_table_path, lexer, parser, code_generator
+    input_path,
+    tok_output_path,
+    grammar_output_path,
+    symbol_table_path,
+    lexer,
+    parser,
+    code_generator,
 ):
     try:
         tokenized_output = []
-        with open(input_path, "r") as input_file, open(
-            tok_output_path, "w"
-        ) as output_file:
+        with (
+            open(input_path, "r") as input_file,
+            open(tok_output_path, "w") as output_file,
+        ):
             for line_number, line in enumerate(input_file, 1):
                 if line.strip():
                     # lexical analysis
-                    # print(f"\nTokenizing expression: {expression}")
-                    # print("-" * 40)
                     tokens = lexer.tokenize(line.strip(), line_number)
                     output_file.write(" ".join(tokens) + "\n")
                     tokenized_output.append(tokens)
-                    
 
                     # syntax analysis
                     try:
                         ast = parser.parse(line.strip())
                         # if ast:
                         #     print(f"AST: {ast}, line: {line_number}")
-                        
+
                         # generator = CodeGenerator(symbol_table)
                         # # assembly = generator.generate(parsed_output_test, tokenized_output_test)
                         # assembly = code_generator.generate(ast, tokens)
@@ -36,7 +40,7 @@ def compile(
 
         lexer.save_symbol_table(symbol_table_path)
         parser.save_parsed_output(grammar_output_path)
-        
+
         # print("Parser AST: ", type(parser.ast_output))
         # print("Lexer Tokens: ", type(lexer.get_symbol_table_as_dict()))
         symbol_table = lexer.get_symbol_table_as_dict()
@@ -47,17 +51,17 @@ def compile(
         # print("ufckadsfasdf\n\n")
         # print(type(parse_output))
         # print(symbol_table)
-        
+
         code_generator = CodeGenerator(symbol_table)
         print("ufckadsfasdf")
-        
+
         # print("parse_output: ", parse_output)
         # print("tokenized_output: ", type(tokenized_output))
         # print(len(tokenized_output))
-        
+
         # print("ufckadsfasdf")
         code_generator.generate(parse_output, tokenized_output)
-        
+
         # print("ufckadsfasdf")
         # code_generator.save_assembly("src/output/laika.asm")
 
@@ -89,7 +93,7 @@ def main():
         symbol_table_file,
         lexer,
         parser,
-        code_generator
+        code_generator,
     ):
         print(f"Successfully processed {input_file} and generated:")
         print(f"- Symbol Table: {symbol_table_file}")
